@@ -24,7 +24,6 @@ COPY apps/web ./apps/web
 COPY brand ./brand
 COPY copy ./copy
 COPY case-studies ./case-studies
-COPY fonts ./fonts
 
 # Build — REPO_ROOT=/app mirrors the local dev environment
 WORKDIR /app/apps/web
