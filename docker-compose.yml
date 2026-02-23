@@ -1,0 +1,21 @@
+# Condor Web — Docker Compose
+# Uso: docker compose up --build
+# La app estará en http://localhost:3000
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - HOST=0.0.0.0
+      # SMTP (opcional): configura para el formulario de contacto
+      # - SMTP_HOST=smtp.ejemplo.com
+      # - SMTP_PORT=587
+      # - SMTP_USER=tu_usuario
+      # - SMTP_PASS=tu_password
+      # - CONTACT_FROM=noreply@condorco.co
+      # - CONTACT_TO=contacto@condorco.co

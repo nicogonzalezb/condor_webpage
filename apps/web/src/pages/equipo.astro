@@ -1,0 +1,40 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import SectionHeading from '@/components/SectionHeading.astro'
+
+const TEAM = [
+  {name: 'Nicolás Gonzalez', role: 'CEO & CTO · Fundador', tag: 'Fundador'},
+  {name: 'Silvana Gonzalez', role: 'Diseñadora', tag: 'Diseño'},
+  {name: 'Edgar Gonzalez', role: 'Desarrollador', tag: 'Ingeniería'},
+]
+
+const tagColors = [
+  'bg-condor-yellow text-condor-navy',
+  'bg-condor-pink text-condor-navy',
+  'bg-condor-sky text-condor-navy',
+]
+---
+
+<BaseLayout title="Equipo">
+  <div class="container-condor py-14 md:py-20">
+    <SectionHeading
+      title="Equipo"
+      subtitle="Un equipo pequeño, enfocado en construir soluciones robustas. Menos promesas; más entregables."
+    />
+
+    <div class="grid gap-5 md:grid-cols-3">
+      {TEAM.map((m, i) => (
+        <div class="group bg-white border-2 border-condor-navy shadow-[4px_4px_0_#031463] hover:shadow-[6px_6px_0_#031463] hover:-translate-x-[2px] hover:-translate-y-[2px] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all duration-150 p-7">
+          <div class={`inline-block px-2 py-0.5 text-xs font-black uppercase tracking-wide border border-condor-navy mb-4 ${tagColors[i % tagColors.length]}`}>
+            {m.tag}
+          </div>
+          <div class="text-xl font-black text-condor-navy uppercase leading-tight">{m.name}</div>
+          <div class="mt-2 text-sm text-condor-bluegray" style="font-family: var(--font-condor-mono);">{m.role}</div>
+          <div class="mt-6 text-xs text-condor-navy/40 group-hover:text-condor-pink transition-colors duration-150" style="font-family: var(--font-condor-mono);">
+            LinkedIn →
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

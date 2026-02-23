@@ -1,0 +1,47 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import SectionHeading from '@/components/SectionHeading.astro'
+import Button from '@/components/Button.astro'
+import { ContactForm } from '@/components/ContactForm'
+import { getCalendarUrl } from '@/lib/site'
+
+const calendarUrl = getCalendarUrl()
+---
+
+<BaseLayout title="Contacto">
+  <div class="container-condor py-14 md:py-20">
+    <SectionHeading
+      title="Contacto"
+      subtitle="Cuéntanos qué quieres construir. Te respondemos con claridad: si aplica, cómo lo haríamos, y qué necesitaríamos."
+    />
+
+    <div class="grid gap-8 md:grid-cols-2">
+      <!-- Contact form card -->
+      <div class="bg-white border-2 border-condor-navy shadow-[4px_4px_0_#031463] p-7">
+        <div class="text-xs font-black text-condor-navy uppercase tracking-widest mb-4" style="font-family: var(--font-condor-mono);">
+          Envíanos un mensaje
+        </div>
+        <ContactForm client:load />
+      </div>
+
+      <!-- Aside: calendar CTA -->
+      <aside class="bg-condor-navy border-2 border-condor-yellow shadow-[6px_6px_0_#E8DB7D] p-7 self-start">
+        <div class="text-xs font-black text-condor-yellow/60 uppercase tracking-widest mb-3" style="font-family: var(--font-condor-mono);">
+          Respuesta rápida
+        </div>
+        <div class="text-2xl font-black text-condor-yellow uppercase leading-tight">Agenda una llamada demo</div>
+        <p class="mt-3 text-sm text-condor-yellow/70" style="font-family: var(--font-condor-mono);">
+          Si necesitas asistencia inmediata, agenda una llamada demo con nuestro equipo.
+        </p>
+        <div class="mt-6">
+          <Button href={calendarUrl} variant="navy" class="w-full justify-center">
+            Agenda ahora →
+          </Button>
+        </div>
+        <div class="mt-8 border-t border-condor-yellow/20 pt-4 text-xs text-condor-yellow/40" style="font-family: var(--font-condor-mono);">
+          Horario: Lun–Vie · 9:00–18:00 (COT)
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>

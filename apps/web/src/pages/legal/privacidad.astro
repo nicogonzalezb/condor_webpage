@@ -1,0 +1,53 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import SectionHeading from '@/components/SectionHeading.astro'
+---
+
+<BaseLayout title="Privacidad">
+  <div class="container-condor py-14 md:py-20">
+    <SectionHeading title="Política de privacidad" subtitle="Borrador inicial (revisar antes de publicar)." />
+
+    <div class="rounded-2xl border border-condor-navy/10 bg-background-card p-7 shadow-[var(--shadow-card)]">
+      <div class="prose prose-sm max-w-none">
+        <p>
+          En Condór ("nosotros") respetamos tu privacidad. Esta política describe qué datos recopilamos cuando visitas
+          <span style="font-family: var(--font-condor-mono);"> condorco.co</span> y cuando nos contactas, y cómo los usamos.
+        </p>
+
+        <h3>Datos que recopilamos</h3>
+        <ul>
+          <li>Datos de contacto: nombre, correo, teléfono (si lo proporcionas), empresa.</li>
+          <li>Contenido del mensaje que envías por el formulario.</li>
+          <li>Datos técnicos básicos (p. ej. IP aproximada) para prevenir abuso y seguridad.</li>
+        </ul>
+
+        <h3>Cómo usamos tus datos</h3>
+        <ul>
+          <li>Responder tu solicitud y coordinar reuniones.</li>
+          <li>Mejorar el sitio y prevenir spam/abuso.</li>
+        </ul>
+
+        <h3>Base legal</h3>
+        <p>
+          Tratamos tus datos porque nos los entregas voluntariamente para contactarnos y porque tenemos interés legítimo
+          en operar y proteger este sitio.
+        </p>
+
+        <h3>Compartición</h3>
+        <p>
+          No vendemos tus datos. Podemos usar proveedores de infraestructura (hosting, correo) para operar el sitio. Solo
+          comparten lo necesario para prestar el servicio.
+        </p>
+
+        <h3>Retención</h3>
+        <p>Conservamos los mensajes el tiempo necesario para atender tu solicitud y fines operativos razonables.</p>
+
+        <h3>Tus derechos</h3>
+        <p>Puedes solicitar acceso, corrección o eliminación escribiendo al correo que publiquemos en la página de contacto.</p>
+
+        <h3>Contacto</h3>
+        <p>Si tienes preguntas sobre esta política, contáctanos desde la <a href="/contacto">página de contacto</a>.</p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

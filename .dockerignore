@@ -1,0 +1,11 @@
+node_modules
+apps/web/node_modules
+apps/web/dist
+
+# Excluir studio completo pero permitir su package.json
+apps/studio
+!apps/studio/package.json
+
+docs
+.git
+*.md

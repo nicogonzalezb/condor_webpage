@@ -1,0 +1,49 @@
+---
+type Variant = 'primary' | 'secondary' | 'ghost' | 'accent' | 'outline' | 'navy'
+
+interface Props {
+  href?: string
+  variant?: Variant
+  class?: string
+  external?: boolean
+  [key: string]: unknown
+}
+
+const {
+  href,
+  variant = 'primary',
+  class: className = '',
+  external,
+  ...rest
+} = Astro.props
+
+const base = 'inline-flex items-center justify-center px-6 py-3 text-sm font-bold border-2 border-condor-navy transition-all duration-150 ease-in-out cursor-pointer focus:outline-none focus:ring-2 focus:ring-condor-sky focus:ring-offset-2 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none hover:-translate-x-[2px] hover:-translate-y-[2px]'
+
+const variantStyles: Record<Variant, string> = {
+  primary:   'bg-condor-navy text-condor-yellow shadow-[4px_4px_0_#031463] hover:shadow-[6px_6px_0_#031463] border-condor-navy',
+  secondary: 'bg-white text-condor-navy shadow-[4px_4px_0_#031463] hover:shadow-[6px_6px_0_#031463] hover:bg-condor-yellow',
+  ghost:     'bg-transparent text-condor-navy border-condor-navy/40 shadow-none hover:bg-condor-navy/10 hover:border-condor-navy hover:shadow-[4px_4px_0_#031463] hover:translate-x-0 hover:translate-y-0',
+  accent:    'bg-condor-pink text-condor-navy shadow-[4px_4px_0_#031463] hover:shadow-[6px_6px_0_#031463] border-condor-navy',
+  outline:   'bg-transparent text-condor-navy border-condor-navy shadow-[4px_4px_0_#031463] hover:shadow-[6px_6px_0_#031463] hover:bg-condor-navy hover:text-condor-yellow',
+  navy:      'bg-condor-navy text-condor-yellow border-condor-yellow shadow-[4px_4px_0_#E8DB7D] hover:shadow-[6px_6px_0_#E8DB7D] hover:bg-condor-yellow hover:text-condor-navy hover:border-condor-navy',
+}
+
+const cls = `${base} ${variantStyles[variant as Variant]} ${className}`
+const isExternal = external || (href && !href.startsWith('/'))
+---
+
+{href ? (
+  isExternal ? (
+    <a class={cls} href={href} target="_blank" rel="noopener noreferrer" {...rest}>
+      <slot />
+    </a>
+  ) : (
+    <a class={cls} href={href} {...rest}>
+      <slot />
+    </a>
+  )
+) : (
+  <button class={cls} {...rest}>
+    <slot />
+  </button>
+)}

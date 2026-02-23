@@ -1,0 +1,60 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import SectionHeading from '@/components/SectionHeading.astro'
+import Button from '@/components/Button.astro'
+import { SOLUTION_PILLARS } from '@/lib/solutions'
+
+const accentColors = [
+  'border-l-4 border-condor-pink',
+  'border-l-4 border-condor-sky',
+  'border-l-4 border-condor-yellow',
+  'border-l-4 border-condor-bluegray',
+]
+---
+
+<BaseLayout title="Soluciones">
+  <div class="container-condor py-14 md:py-20">
+    <SectionHeading
+      title="Soluciones"
+      subtitle="Cuatro pilares para construir, operar y escalar IA con claridad: desde agentes conversacionales hasta gobernanza y software a medida."
+    />
+
+    <div class="grid gap-5 md:grid-cols-2">
+      {SOLUTION_PILLARS.map((p, i) => (
+        <div class={`group bg-white border-2 border-condor-navy shadow-[4px_4px_0_#031463] hover:shadow-[6px_6px_0_#031463] hover:-translate-x-[2px] hover:-translate-y-[2px] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all duration-150 p-7`}>
+          <div class={`text-xs font-black uppercase tracking-widest text-condor-bluegray mb-3 pb-3 ${accentColors[i % accentColors.length]}`} style="font-family: var(--font-condor-mono);">
+            Pilar 0{i + 1}
+          </div>
+          <div class="text-xl font-black text-condor-navy uppercase">{p.title}</div>
+          <p class="mt-2 text-sm leading-6 text-condor-navy/60" style="font-family: var(--font-condor-mono);">{p.summary}</p>
+          <ul class="mt-4 space-y-2 text-sm text-condor-navy/60">
+            {p.highlights.map((h) => (
+              <li class="flex gap-3 items-start">
+                <span class="mt-[6px] h-2 w-2 shrink-0 bg-condor-pink border border-condor-navy" />
+                <span style="font-family: var(--font-condor-mono);">{h}</span>
+              </li>
+            ))}
+          </ul>
+          <div class="mt-6">
+            <Button href={`/soluciones/${p.slug}`} variant="secondary">
+              Ver detalle →
+            </Button>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA block -->
+    <div class="mt-12 bg-condor-navy border-2 border-condor-yellow shadow-[6px_6px_0_#E8DB7D] p-8 md:p-10">
+      <div class="text-2xl font-black text-condor-yellow uppercase leading-tight">¿Quieres que lo aterrizamos a tu caso?</div>
+      <p class="mt-3 max-w-2xl text-sm text-condor-yellow/70" style="font-family: var(--font-condor-mono);">
+        Sin urgencia falsa: una conversación breve para entender tu contexto, datos y restricciones, y proponerte un plan realista.
+      </p>
+      <div class="mt-6">
+        <Button href="/contacto" variant="accent">
+          Hablemos
+        </Button>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

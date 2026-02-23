@@ -1,0 +1,37 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import SectionHeading from '@/components/SectionHeading.astro'
+---
+
+<BaseLayout title="Cookies">
+  <div class="container-condor py-14 md:py-20">
+    <SectionHeading title="Política de cookies" subtitle="Borrador inicial (revisar antes de publicar)." />
+
+    <div class="rounded-2xl border border-condor-navy/10 bg-background-card p-7 shadow-[var(--shadow-card)]">
+      <div class="prose prose-sm max-w-none">
+        <p>
+          Usamos cookies y tecnologías similares para que el sitio funcione correctamente y, opcionalmente, para medir
+          uso y rendimiento.
+        </p>
+
+        <h3>¿Qué son cookies?</h3>
+        <p>Son pequeños archivos que el navegador guarda para recordar información (p. ej. preferencias).</p>
+
+        <h3>Cookies esenciales</h3>
+        <p>Podemos usar cookies estrictamente necesarias para funcionalidades básicas y seguridad.</p>
+
+        <h3>Analítica</h3>
+        <p>
+          Si habilitamos analítica (p. ej. para medir clicks en "Agendar"), lo indicaremos aquí y podrás deshabilitarlo
+          mediante tu navegador o mediante un banner si aplica.
+        </p>
+
+        <h3>Cómo controlar cookies</h3>
+        <p>
+          Puedes eliminar o bloquear cookies desde la configuración de tu navegador. Ten en cuenta que algunas partes del
+          sitio podrían no funcionar igual.
+        </p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

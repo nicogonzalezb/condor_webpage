@@ -1,0 +1,73 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import SectionHeading from '@/components/SectionHeading.astro'
+import Button from '@/components/Button.astro'
+import { SOLUTION_PILLARS } from '@/lib/solutions'
+import { getCalendarUrl } from '@/lib/site'
+
+const { slug } = Astro.params
+const pillar = SOLUTION_PILLARS.find((p) => p.slug === slug)
+
+if (!pillar) {
+  return Astro.redirect('/404')
+}
+
+const calendarUrl = getCalendarUrl()
+---
+
+<BaseLayout title={pillar.title} description={pillar.summary}>
+  <div class="container-condor py-14 md:py-20">
+    <SectionHeading title={pillar.title} subtitle={pillar.summary} />
+
+    <div class="grid gap-10 md:grid-cols-3">
+      <div class="md:col-span-2 space-y-6">
+        <!-- Qué entregamos -->
+        <div class="rounded-2xl border border-condor-navy/10 bg-background-card p-7 shadow-[var(--shadow-card)]">
+          <div class="text-sm font-semibold text-foreground">Qué entregamos</div>
+          <ul class="mt-4 space-y-2 text-sm text-foreground-muted">
+            {pillar.highlights.map((h) => (
+              <li class="flex gap-2">
+                <span class="mt-[6px] h-1.5 w-1.5 shrink-0 rounded-full bg-condor-pink" />
+                <span>{h}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Cómo trabajamos -->
+        <div class="rounded-2xl border border-condor-navy/10 bg-background-card p-7 shadow-[var(--shadow-card)]">
+          <div class="text-sm font-semibold text-foreground">Cómo trabajamos</div>
+          <ol class="mt-4 space-y-3 text-sm text-foreground-muted">
+            {[
+              'Diagnóstico breve: contexto, datos disponibles, integraciones y restricciones.',
+              'Propuesta clara: alcance, entregables y criterios de éxito.',
+              'Construcción incremental: pruebas tempranas con usuarios y métricas.',
+              'Operación: monitoreo, documentación y handoff.',
+            ].map((s) => (
+              <li class="flex gap-3">
+                <span class="mt-[2px] text-xs text-condor-bluegray" style="font-family: var(--font-condor-mono);">•</span>
+                <span>{s}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+
+      <!-- Sidebar navy CTA -->
+      <aside class="rounded-3xl bg-background-navy p-7 self-start">
+        <div class="text-lg font-extrabold text-foreground-on-navy">Hablemos</div>
+        <p class="mt-2 text-sm text-foreground-on-navy/75" style="font-family: var(--font-condor-serif);">
+          Si te sirve, agenda una llamada corta. Sin presión: solo claridad sobre si esto aplica (o no) a tu caso.
+        </p>
+        <div class="mt-6 flex flex-col gap-3">
+          <Button href={calendarUrl} variant="accent">
+            Agenda una reunión
+          </Button>
+          <Button href="/contacto" variant="outline" class="border-white/30 text-foreground-on-navy hover:bg-white/10 hover:text-foreground-on-navy">
+            Escríbenos
+          </Button>
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>

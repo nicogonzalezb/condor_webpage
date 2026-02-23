@@ -1,0 +1,120 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+:root {
+  /* Brand palette */
+  --condor-navy: #031463;
+  --condor-pink: #FCC4D5;
+  --condor-yellow: #E8DB7D;
+  --condor-bluegray: #376996;
+  --condor-sky: #56CBF9;
+
+  /* Neobrutalism theme */
+  --background: #E8DB7D;
+  --background-card: #FFFFFF;
+  --background-navy: #031463;
+  --foreground: #031463;
+  --foreground-muted: #376996;
+  --foreground-on-navy: #E8DB7D;
+
+  /* Hard neobrutalist shadows */
+  --shadow-hard: 4px 4px 0px #031463;
+  --shadow-hard-hover: 6px 6px 0px #031463;
+  --shadow-hard-pink: 4px 4px 0px #FCC4D5;
+  --shadow-hard-sm: 2px 2px 0px #031463;
+
+  /* Legacy (kept for compat) */
+  --shadow-card: 4px 4px 0px #031463;
+  --shadow-card-hover: 6px 6px 0px #031463;
+  --shadow-pink: 4px 4px 0px #FCC4D5;
+  --shadow-yellow: 4px 4px 0px #E8DB7D;
+  --shadow-elevated: 6px 6px 0px #031463;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-background-card: var(--background-card);
+  --color-background-navy: var(--background-navy);
+  --color-foreground: var(--foreground);
+  --color-foreground-muted: var(--foreground-muted);
+  --color-foreground-on-navy: var(--foreground-on-navy);
+
+  --color-condor-navy: var(--condor-navy);
+  --color-condor-pink: var(--condor-pink);
+  --color-condor-yellow: var(--condor-yellow);
+  --color-condor-bluegray: var(--condor-bluegray);
+  --color-condor-sky: var(--condor-sky);
+
+  --font-sans: var(--font-condor-sans), system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: var(--font-condor-serif), Georgia, serif;
+  --font-mono: var(--font-condor-mono), "Courier New", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container-condor {
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+/* Neobrutalist card base */
+.card-brutal {
+  background: #ffffff;
+  border: 2px solid #031463;
+  box-shadow: var(--shadow-hard);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.card-brutal:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-hard-hover);
+}
+
+/* Neobrutalist button base */
+.btn-brutal {
+  border: 2px solid #031463;
+  box-shadow: var(--shadow-hard-sm);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.btn-brutal:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-hard);
+}
+
+.btn-brutal:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+/* Prose overrides for legal pages */
+.prose {
+  --tw-prose-body: var(--condor-navy);
+  --tw-prose-headings: var(--condor-navy);
+  --tw-prose-links: var(--condor-bluegray);
+  --tw-prose-bullets: var(--condor-pink);
+  --tw-prose-hr: rgba(3, 20, 99, 0.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-brutal,
+  .btn-brutal {
+    transition: none;
+  }
+}

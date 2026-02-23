@@ -1,0 +1,10 @@
+Bueno, en primera instancia vamos a hablar de Sr. Insignia. Sr. Insignia es una empresa que vende pines y hace metalurgia y todo tipo de merchandising. Y a ellos les hicimos un chatbot. Entonces, pues ese es un caso de estudio, es un chatbot que les califica los leads y se los da al equipo comercial. Ese es el primero.
+
+
+
+Listo, por otro lado, con "micasino" hicimos un software que ayuda a que las personas que trabajan con ellos puedan trabajar remoto y puedan controlar las horas que se hacen de forma inteligente sin necesidad de grandes intervenciones o grandes software de recursos humanos, ya que ellos son una empresa que estaban haciendo aquí en Colombia.
+
+Y listo, otra es implementamos un sistema de administración con uff-nails y también un chatbot que hace lo mismo que el de señor insignia.
+
+
+Listo y para vía alambre hemos hecho un sistema que ayuda a hacer cotizaciones a partir de imágenes o descripciones y implementamos IA con eso.

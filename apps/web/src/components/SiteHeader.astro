@@ -1,0 +1,101 @@
+---
+import { getCalendarUrl } from '@/lib/site'
+import { CoWheel } from './CoWheel'
+
+const calendarUrl = getCalendarUrl()
+const CO_WORDS = ['company', 'communication', 'collaboration', 'consulting', 'compute']
+---
+
+<header class="sticky top-0 z-50 bg-condor-navy border-b-2 border-condor-yellow">
+  <div class="container-condor flex items-center justify-between py-4">
+    <!-- Logo -->
+    <a href="/" class="inline-flex items-baseline gap-0 group focus:outline-none focus:ring-2 focus:ring-condor-sky focus:ring-offset-2 focus:ring-offset-condor-navy">
+      <span class="text-2xl font-black tracking-tight text-condor-yellow uppercase">
+        Cóndor
+      </span>
+      <span class="hidden md:inline-flex items-baseline text-2xl font-bold tracking-tight text-condor-yellow/60 relative -top-px text-[0.85em] -ml-1">
+        <CoWheel client:load words={CO_WORDS} variant="brand" />
+      </span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex items-center gap-1 text-sm font-bold">
+      <a href="/soluciones" class="px-3 py-2 text-condor-yellow/80 hover:text-condor-yellow hover:bg-white/10 transition-colors duration-150 uppercase tracking-wide">
+        Soluciones
+      </a>
+      <a href="/casos" class="px-3 py-2 text-condor-yellow/80 hover:text-condor-yellow hover:bg-white/10 transition-colors duration-150 uppercase tracking-wide">
+        Casos
+      </a>
+      <a href="/equipo" class="px-3 py-2 text-condor-yellow/80 hover:text-condor-yellow hover:bg-white/10 transition-colors duration-150 uppercase tracking-wide">
+        Equipo
+      </a>
+      <a href="/contacto" class="px-3 py-2 text-condor-yellow/80 hover:text-condor-yellow hover:bg-white/10 transition-colors duration-150 uppercase tracking-wide">
+        Contacto
+      </a>
+    </nav>
+
+    <!-- CTA + hamburger -->
+    <div class="flex items-center gap-3">
+      <a
+        href={calendarUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden md:inline-flex items-center justify-center bg-condor-yellow text-condor-navy px-5 py-2 text-sm font-black border-2 border-condor-yellow shadow-[3px_3px_0_#E8DB7D] hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-[5px_5px_0_#E8DB7D] hover:bg-white active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all duration-150 uppercase tracking-wide focus:outline-none focus:ring-2 focus:ring-condor-sky focus:ring-offset-2 focus:ring-offset-condor-navy"
+      >
+        Agenda una reunión
+      </a>
+
+      <!-- Mobile hamburger -->
+      <button
+        id="nav-toggle"
+        class="md:hidden text-condor-yellow p-2 border border-condor-yellow/40 hover:bg-white/10 transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-condor-sky"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg id="icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden bg-condor-navy border-t-2 border-condor-yellow/30"
+  >
+    <nav class="container-condor py-4 flex flex-col gap-1 text-sm font-bold">
+      <a href="/soluciones" class="text-condor-yellow/80 hover:text-condor-yellow hover:bg-white/10 transition-colors py-3 px-2 uppercase tracking-wide">Soluciones</a>
+      <a href="/casos" class="text-condor-yellow/80 hover:text-condor-yellow hover:bg-white/10 transition-colors py-3 px-2 uppercase tracking-wide">Casos</a>
+      <a href="/equipo" class="text-condor-yellow/80 hover:text-condor-yellow hover:bg-white/10 transition-colors py-3 px-2 uppercase tracking-wide">Equipo</a>
+      <a href="/contacto" class="text-condor-yellow/80 hover:text-condor-yellow hover:bg-white/10 transition-colors py-3 px-2 uppercase tracking-wide">Contacto</a>
+      <a
+        href={calendarUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-3 inline-flex items-center justify-center bg-condor-yellow text-condor-navy px-5 py-3 font-black border-2 border-condor-yellow shadow-[3px_3px_0_#E8DB7D] uppercase tracking-wide transition-all duration-150 hover:bg-white"
+      >
+        Agenda una reunión
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('nav-toggle')
+  const menu = document.getElementById('mobile-menu')
+  const iconOpen = document.getElementById('icon-open')
+  const iconClose = document.getElementById('icon-close')
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = !menu?.classList.contains('hidden')
+    menu?.classList.toggle('hidden', isOpen)
+    iconOpen?.classList.toggle('hidden', !isOpen)
+    iconClose?.classList.toggle('hidden', isOpen)
+    toggle.setAttribute('aria-expanded', String(!isOpen))
+  })
+</script>

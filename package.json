@@ -1,0 +1,15 @@
+{
+  "name": "condorco-monorepo",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "REPO_ROOT=$(pwd) npm run dev -w @condor/web",
+    "dev:web": "REPO_ROOT=$(pwd) npm run dev -w @condor/web",
+    "dev:studio": "npm run dev -w @condor/studio",
+    "build": "REPO_ROOT=$(pwd) npm run build -w @condor/web && npm run build -w @condor/studio",
+    "build:web": "REPO_ROOT=$(pwd) npm run build -w @condor/web",
+    "preview": "REPO_ROOT=$(pwd) npm run preview -w @condor/web"
+  }
+}

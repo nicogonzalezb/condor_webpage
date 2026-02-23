@@ -1,0 +1,68 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import SectionHeading from '@/components/SectionHeading.astro'
+import Button from '@/components/Button.astro'
+import { getLocalCaseStudies } from '@/lib/caseStudies'
+import { getCalendarUrl } from '@/lib/site'
+
+const { slug } = Astro.params
+const c = getLocalCaseStudies().find((x) => x.slug === slug)
+
+if (!c) {
+  return Astro.redirect('/404')
+}
+
+const calendarUrl = getCalendarUrl()
+---
+
+<BaseLayout title={c.title} description={c.summary}>
+  <div class="container-condor py-14 md:py-20">
+    <SectionHeading title={c.title} subtitle={c.summary} />
+
+    <div class="grid gap-10 md:grid-cols-3">
+      <div class="md:col-span-2 space-y-6">
+        <!-- Contexto -->
+        <div class="rounded-2xl border border-condor-navy/10 bg-background-card p-7 shadow-[var(--shadow-card)]">
+          <div class="text-sm font-semibold text-foreground">Contexto</div>
+          <p class="mt-3 text-sm leading-6 text-foreground-muted">
+            Este caso está publicado con un resumen inicial. Cuando pasemos estos casos a Sanity, agregaremos estructura:
+            problema, enfoque, entregables y resultados.
+          </p>
+        </div>
+
+        <!-- Qué hicimos -->
+        <div class="rounded-2xl border border-condor-navy/10 bg-background-card p-7 shadow-[var(--shadow-card)]">
+          <div class="text-sm font-semibold text-foreground">Qué hicimos</div>
+          <ul class="mt-4 space-y-2 text-sm text-foreground-muted">
+            {[
+              'Diseño de solución con criterios claros de éxito.',
+              'Construcción e integración con flujos existentes.',
+              'Entrega con documentación y recomendaciones de operación.',
+            ].map((x) => (
+              <li class="flex gap-2">
+                <span class="mt-[6px] h-1.5 w-1.5 shrink-0 rounded-full bg-condor-pink" />
+                <span>{x}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      <!-- Sidebar navy CTA -->
+      <aside class="rounded-3xl bg-background-navy p-7 self-start">
+        <div class="text-lg font-extrabold text-foreground-on-navy">¿Te sirve algo parecido?</div>
+        <p class="mt-2 text-sm text-foreground-on-navy/75" style="font-family: var(--font-condor-serif);">
+          Agenda una llamada corta y lo aterrizamos a tu industria, tus datos y tus restricciones.
+        </p>
+        <div class="mt-6 flex flex-col gap-3">
+          <Button href={calendarUrl} variant="accent">
+            Agenda una reunión
+          </Button>
+          <Button href="/contacto" variant="outline" class="border-white/30 text-foreground-on-navy hover:bg-white/10 hover:text-foreground-on-navy">
+            Escríbenos
+          </Button>
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>

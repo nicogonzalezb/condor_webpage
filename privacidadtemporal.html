@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Política de Privacidad - Condor Co</title>
+  <meta name="description" content="Política de privacidad de Condor Co. Conoce cómo recopilamos, usamos y protegemos tu información personal.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      /* Brand palette */
+      --condor-navy: #031463;
+      --condor-pink: #fcc4d5;
+      --condor-yellow: #e8db7d;
+      --condor-bluegray: #376996;
+      --condor-sky: #56cbf9;
+
+      /* UI tokens */
+      --background: var(--condor-yellow);
+      --foreground: var(--condor-navy);
+      --surface: #f0ebb8;
+      --border: rgba(3, 20, 99, 0.28);
+      --shadow-card: 0 14px 34px rgba(3, 20, 99, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--background);
+      background-image:
+        radial-gradient(900px 520px at 50% -10%, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.0) 65%),
+        radial-gradient(800px 520px at 10% 25%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.0) 60%),
+        radial-gradient(900px 560px at 90% 35%, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.0) 62%);
+      color: var(--foreground);
+      font-family: 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    .container-condor {
+      width: 100%;
+      max-width: 1120px;
+      margin-inline: auto;
+      padding-inline: 1.25rem;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid var(--border);
+      background-color: rgba(232, 219, 125, 0.7);
+      backdrop-filter: blur(8px);
+    }
+
+    header .container-condor {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--condor-navy);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      padding: 0.75rem 1.25rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      background-color: var(--condor-navy);
+      color: var(--condor-yellow);
+      text-decoration: none;
+      transition: opacity 0.2s;
+      box-shadow: 0 20px 60px rgba(3, 20, 99, 0.18);
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    /* Main content */
+    main {
+      padding: 3.5rem 0 5rem;
+    }
+
+    @media (min-width: 768px) {
+      main {
+        padding: 5rem 0 6rem;
+      }
+    }
+
+    /* Section heading */
+    .section-heading {
+      margin-bottom: 2rem;
+    }
+
+    .section-heading h1 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--condor-navy);
+    }
+
+    @media (min-width: 768px) {
+      .section-heading h1 {
+        font-size: 1.875rem;
+      }
+    }
+
+    .section-heading p {
+      margin-top: 0.5rem;
+      max-width: 42rem;
+      font-family: 'Lora', serif;
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+      color: rgba(3, 20, 99, 0.8);
+    }
+
+    /* Card */
+    .card {
+      border-radius: 1.5rem;
+      border: 1px solid var(--border);
+      background-color: var(--surface);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-card);
+    }
+
+    /* Prose styling */
+    .prose {
+      max-width: none;
+      color: rgba(3, 20, 99, 0.8);
+      font-size: 0.875rem;
+    }
+
+    .prose p {
+      margin-bottom: 1rem;
+    }
+
+    .prose h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--condor-navy);
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .prose h2:first-child {
+      margin-top: 0;
+    }
+
+    .prose h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--condor-navy);
+      margin-top: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .prose ul {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+    }
+
+    .prose li {
+      margin-bottom: 0.25rem;
+    }
+
+    .prose strong {
+      color: var(--condor-navy);
+      font-weight: 600;
+    }
+
+    .prose .highlight-box {
+      background-color: rgba(255, 255, 255, 0.4);
+      border-left: 4px solid var(--condor-navy);
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 0 0.5rem 0.5rem 0;
+    }
+
+    .prose .highlight-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    .prose a {
+      color: var(--condor-bluegray);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .prose a:hover {
+      color: var(--condor-navy);
+    }
+
+    /* Contact info */
+    .contact-info {
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    .contact-info p {
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-info p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 4rem;
+      border-top: 1px solid var(--border);
+      background-color: rgba(240, 235, 184, 0.4);
+    }
+
+    footer .container-condor {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-content {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+    }
+
+    .footer-brand {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--condor-navy);
+    }
+
+    .footer-description {
+      margin-top: 0.75rem;
+      max-width: 28rem;
+      font-family: 'Lora', serif;
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+      color: rgba(3, 20, 99, 0.8);
+    }
+
+    .footer-links {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem;
+      font-size: 0.875rem;
+    }
+
+    .footer-links-title {
+      font-weight: 600;
+      color: var(--condor-navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links a {
+      display: block;
+      color: rgba(3, 20, 99, 0.8);
+      text-decoration: none;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .footer-copyright {
+      margin-top: 2.5rem;
+      font-size: 0.75rem;
+      color: rgba(3, 20, 99, 0.6);
+    }
+
+    /* Last updated */
+    .last-updated {
+      font-size: 0.75rem;
+      color: rgba(3, 20, 99, 0.6);
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container-condor">
+      <a href="/" class="logo">Condor Co</a>
+      <a href="mailto:n@condorco.co" class="btn-primary">Contáctanos</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="container-condor">
+      <div class="section-heading">
+        <h1>Política de Privacidad</h1>
+        <p>En Condor Co respetamos tu privacidad. Esta política describe qué datos recopilamos, cómo los usamos y cómo los protegemos.</p>
+      </div>
+
+      <div class="card">
+        <div class="prose">
+          
+          <h2>1. Información que recopilamos</h2>
+          <p>Recopilamos información que nos proporcionas directamente cuando utilizas nuestros servicios:</p>
+          <ul>
+            <li><strong>Datos de contacto:</strong> nombre, correo electrónico, número de teléfono y empresa.</li>
+            <li><strong>Contenido de mensajes:</strong> el contenido de las conversaciones que mantienes con nuestros servicios, incluyendo mensajes de WhatsApp.</li>
+            <li><strong>Datos técnicos:</strong> dirección IP aproximada, tipo de dispositivo y navegador, para prevenir abuso y garantizar la seguridad.</li>
+          </ul>
+
+          <h2>2. Cómo usamos tu información</h2>
+          <p>Utilizamos la información recopilada para:</p>
+          <ul>
+            <li>Responder tus solicitudes y prestar los servicios que has solicitado.</li>
+            <li>Operar y mejorar nuestros servicios de chatbot y atención al cliente.</li>
+            <li>Proporcionar soporte técnico y resolver problemas.</li>
+            <li>Prevenir fraude, spam y actividades maliciosas.</li>
+            <li>Cumplir con obligaciones legales aplicables.</li>
+          </ul>
+
+          <h2>3. Uso específico de datos de WhatsApp</h2>
+          <div class="highlight-box">
+            <p><strong>Declaración sobre el uso de la API de WhatsApp:</strong></p>
+            <p>La información recopilada a través de la API de WhatsApp se utiliza <strong>exclusivamente</strong> para:</p>
+            <ul>
+              <li>Mantener la conversación y prestar el servicio solicitado por el usuario.</li>
+              <li>Operar nuestros servicios de chatbot para responder consultas.</li>
+              <li>Proporcionar soporte al cliente.</li>
+            </ul>
+            <p><strong>No vendemos, alquilamos ni compartimos la información personal o conversaciones de WhatsApp con terceros para sus propios fines de marketing.</strong></p>
+          </div>
+
+          <h2>4. Con quién compartimos tu información</h2>
+          <p>Podemos compartir tu información únicamente en las siguientes circunstancias:</p>
+          
+          <h3>Proveedores de servicios</h3>
+          <p>Compartimos datos con proveedores que nos ayudan a operar nuestros servicios, como:</p>
+          <ul>
+            <li><strong>Proveedores de hosting:</strong> para alojar y mantener nuestra infraestructura tecnológica.</li>
+          </ul>
+
+          <h3>Plataformas de inteligencia artificial</h3>
+          <p>Para proporcionar respuestas inteligentes y automatizadas, utilizamos servicios de:</p>
+          <ul>
+            <li>OpenAI</li>
+            <li>Google</li>
+            <li>Anthropic</li>
+          </ul>
+          <p>Estos proveedores procesan los datos necesarios para generar respuestas a tus consultas.</p>
+
+          <h3>Software de CRM</h3>
+          <p>Utilizamos herramientas de gestión de relaciones con clientes como:</p>
+          <ul>
+            <li>KOMMO</li>
+            <li>GoHighLevel</li>
+            <li>Otras plataformas similares según las necesidades del servicio.</li>
+          </ul>
+
+          <h3>Por obligación legal</h3>
+          <p>Podemos divulgar tu información si una autoridad competente (como un juez) nos lo exige legalmente, o si es necesario para:</p>
+          <ul>
+            <li>Cumplir con una obligación legal.</li>
+            <li>Proteger nuestros derechos legales.</li>
+            <li>Prevenir actividades ilegales o fraudulentas.</li>
+          </ul>
+
+          <h2>5. Seguridad de los datos</h2>
+          <p>Implementamos medidas de seguridad técnicas y organizativas apropiadas para proteger tu información personal contra:</p>
+          <ul>
+            <li>Acceso no autorizado.</li>
+            <li>Alteración o divulgación indebida.</li>
+            <li>Destrucción accidental o ilícita.</li>
+          </ul>
+          <p>Estas medidas incluyen cifrado de datos, controles de acceso restringido y monitoreo continuo de nuestros sistemas.</p>
+
+          <h2>6. Tus derechos como usuario</h2>
+          <p>Tienes derecho a:</p>
+          <ul>
+            <li><strong>Acceder</strong> a la información personal que tenemos sobre ti.</li>
+            <li><strong>Solicitar la corrección</strong> de datos inexactos o incompletos.</li>
+            <li><strong>Solicitar la eliminación</strong> de tu información personal.</li>
+            <li><strong>Oponerte</strong> a ciertos tipos de procesamiento de datos.</li>
+          </ul>
+          <p>Para ejercer estos derechos, por favor contáctanos usando la información a continuación.</p>
+
+          <h2>7. Información de contacto</h2>
+          <p>Si tienes preguntas sobre esta política de privacidad o deseas ejercer tus derechos, puedes contactarnos:</p>
+          <div class="contact-info">
+            <p><strong>Empresa:</strong> Condor Co</p>
+            <p><strong>Correo electrónico:</strong> <a href="mailto:n@condorco.co">n@condorco.co</a></p>
+            <p><strong>Dirección:</strong> Calle 101A #68A27, Bogotá, Colombia</p>
+          </div>
+
+          <div class="last-updated">
+            <p>Última actualización: Enero 2026</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container-condor">
+      <div class="footer-content">
+        <div>
+          <div class="footer-brand">Condor Co</div>
+          <p class="footer-description">
+            Soluciones de IA para empresas: chatbots inteligentes, automatización de WhatsApp y atención al cliente.
+          </p>
+        </div>
+
+        <div class="footer-links">
+          <div>
+            <div class="footer-links-title">Legal</div>
+            <a href="#">Política de Privacidad</a>
+            <a href="#">Términos de Servicio</a>
+          </div>
+          <div>
+            <div class="footer-links-title">Contacto</div>
+            <a href="mailto:n@condorco.co">n@condorco.co</a>
+            <a href="#">Calle 101A #68A27, Bogotá, Colombia</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-copyright">
+        © 2026 Condor Co. Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

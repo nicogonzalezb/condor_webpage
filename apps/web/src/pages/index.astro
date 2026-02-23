@@ -1,0 +1,83 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import Button from '@/components/Button.astro'
+import { getCopies } from '@/lib/copies'
+import { getCalendarUrl } from '@/lib/site'
+
+const c = getCopies()
+const calendarUrl = getCalendarUrl()
+
+const pillars = [
+  {title: 'Chat & Agents', desc: 'Automatiza atención y ventas con agentes que entienden tu negocio.', href: '/soluciones/chat-agents', accent: 'bg-condor-pink'},
+  {title: 'Data & ML', desc: 'Modelos, pipelines, analítica y MLOps para decisiones confiables.', href: '/soluciones/data-ml', accent: 'bg-condor-sky'},
+  {title: 'Gobernanza', desc: 'Calidad, seguridad, linaje y mejores prácticas para operar datos.', href: '/soluciones/gobernanza-consultoria', accent: 'bg-condor-yellow border-condor-navy'},
+  {title: 'Software a medida', desc: 'Construimos producto y plataformas con IA integrada.', href: '/soluciones/software-a-medida', accent: 'bg-condor-navy text-condor-yellow'},
+]
+---
+
+<BaseLayout>
+  <div class="container-condor py-12 md:py-20">
+
+    <!-- Hero -->
+    <section class="bg-condor-navy border-2 border-condor-yellow shadow-[8px_8px_0_#E8DB7D] p-8 md:p-14">
+      <div class="max-w-3xl">
+        <div class="inline-block border-2 border-condor-yellow/40 px-3 py-1 mb-6">
+          <span class="text-xs font-black text-condor-yellow/70 uppercase tracking-widest" style="font-family: var(--font-condor-mono);">
+            IA para empresas · Colombia
+          </span>
+        </div>
+        <h1 class="text-5xl font-black tracking-tight md:text-7xl text-condor-yellow uppercase leading-none">
+          {c.heroTitle}
+        </h1>
+        <p class="mt-6 max-w-xl text-base leading-7 text-condor-yellow/75" style="font-family: var(--font-condor-mono);">
+          {c.heroSubtitle}
+        </p>
+        <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+          <Button href="/contacto" variant="navy">
+            Hablemos
+          </Button>
+          <Button href="/soluciones" variant="outline" class="border-condor-yellow text-condor-yellow shadow-[4px_4px_0_#E8DB7D] hover:shadow-[6px_6px_0_#E8DB7D] hover:bg-condor-yellow hover:text-condor-navy">
+            {c.secondaryCtaLabel}
+          </Button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solution pillars grid -->
+    <section class="mt-10 grid gap-4 md:mt-12 md:grid-cols-4">
+      {pillars.map((x) => (
+        <a
+          href={x.href}
+          class="group bg-white border-2 border-condor-navy shadow-[4px_4px_0_#031463] hover:shadow-[6px_6px_0_#031463] hover:-translate-x-[2px] hover:-translate-y-[2px] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all duration-150 cursor-pointer p-6 block"
+        >
+          <div class={`inline-block px-2 py-0.5 text-xs font-black uppercase mb-3 ${x.accent}`}>
+            {x.title}
+          </div>
+          <div class="text-sm leading-6 text-condor-navy/70" style="font-family: var(--font-condor-mono);">{x.desc}</div>
+          <div class="mt-4 text-xs font-black text-condor-bluegray uppercase tracking-wide group-hover:text-condor-navy transition-colors duration-150">
+            Ver más →
+          </div>
+        </a>
+      ))}
+    </section>
+
+    <!-- Secondary CTA -->
+    <section class="mt-10 bg-condor-pink border-2 border-condor-navy shadow-[6px_6px_0_#031463] p-8 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+      <div>
+        <div class="text-2xl font-black text-condor-navy uppercase leading-tight">¿Tienes un proyecto en mente?</div>
+        <p class="mt-2 text-sm text-condor-navy/70 max-w-lg" style="font-family: var(--font-condor-mono);">
+          Una conversación breve para entender tu contexto y proponerte un plan realista.
+        </p>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3 shrink-0">
+        <Button href={calendarUrl} variant="primary">
+          Agenda una reunión
+        </Button>
+        <Button href="/contacto" variant="outline">
+          Escríbenos
+        </Button>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>
