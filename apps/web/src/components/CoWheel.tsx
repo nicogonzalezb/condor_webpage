@@ -14,7 +14,7 @@ function renderWordWithBoldCO(word: string, variant: Props['variant']) {
     const rest = w.slice(2)
     return (
       <>
-        <span className="font-extrabold tracking-tight">CO</span>
+        <span className={variant === 'brand' ? 'font-black tracking-tight text-condor-yellow text-[1.18em] relative -top-[0.05em]' : 'font-extrabold tracking-tight'}>CO</span>
         <span className={variant === 'brand' ? '' : 'opacity-85'}>{rest}</span>
       </>
     )
