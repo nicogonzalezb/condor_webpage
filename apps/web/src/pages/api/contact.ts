@@ -3,11 +3,8 @@ import nodemailer from 'nodemailer'
 
 type Payload = {
   firstName?: string
-  lastName?: string
   email?: string
   phone?: string
-  company?: string
-  message?: string
   company_website?: string // honeypot
 }
 
@@ -39,7 +36,7 @@ function env(name: string) {
   return process.env[name]?.trim()
 }
 
-async function trySendEmail(p: Required<Pick<Payload, 'firstName' | 'lastName' | 'email' | 'message'>> & Payload) {
+async function trySendEmail(p: Required<Pick<Payload, 'firstName' | 'email' | 'phone'>>) {
   const host = env('SMTP_HOST')
   const port = Number(env('SMTP_PORT') || '587')
   const user = env('SMTP_USER')
@@ -58,18 +55,12 @@ async function trySendEmail(p: Required<Pick<Payload, 'firstName' | 'lastName' |
     auth: {user, pass},
   })
 
-  const subject = `Nuevo lead · ${p.firstName} ${p.lastName}`
+  const subject = `Nuevo lead · ${p.firstName}`
   const text = [
-    `Nombre: ${p.firstName} ${p.lastName}`,
+    `Nombre: ${p.firstName}`,
     `Email: ${p.email}`,
-    p.phone ? `Teléfono: ${p.phone}` : null,
-    p.company ? `Empresa: ${p.company}` : null,
-    '',
-    'Mensaje:',
-    p.message,
-  ]
-    .filter(Boolean)
-    .join('\n')
+    `Teléfono: ${p.phone}`,
+  ].join('\n')
 
   await transporter.sendMail({from, to, subject, text, replyTo: p.email})
   return {sent: true as const}
@@ -103,11 +94,10 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   const firstName = String(body.firstName || '').trim()
-  const lastName = String(body.lastName || '').trim()
   const email = String(body.email || '').trim()
-  const message = String(body.message || '').trim()
+  const phone = String(body.phone || '').trim()
 
-  if (!firstName || !lastName || !email || !message) {
+  if (!firstName || !email || !phone) {
     return new Response(JSON.stringify({ok: false, message: 'Faltan campos requeridos.'}), {
       status: 400,
       headers: {'Content-Type': 'application/json'},
@@ -122,7 +112,7 @@ export const POST: APIRoute = async ({ request }) => {
   }
 
   try {
-    const res = await trySendEmail({firstName, lastName, email, message, phone: body.phone, company: body.company})
+    const res = await trySendEmail({firstName, email, phone})
     if (!res.sent) {
       return new Response(
         JSON.stringify({ok: true, message: 'Mensaje recibido. (Envío de email pendiente de configuración SMTP).'}),
