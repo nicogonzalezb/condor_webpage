@@ -1,10 +1,9 @@
-Bueno, en primera instancia vamos a hablar de Sr. Insignia. Sr. Insignia es una empresa que vende pines y hace metalurgia y todo tipo de merchandising. Y a ellos les hicimos un chatbot. Entonces, pues ese es un caso de estudio, es un chatbot que les califica los leads y se los da al equipo comercial. Ese es el primero.
+Sr. Insignia es una empresa de merchandising y metalurgia. Les construimos un chatbot que califica leads automáticamente y los entrega al equipo comercial listos para cerrar.
 
+MiCasino es una empresa colombiana que necesitaba controlar el trabajo remoto de su equipo. Les desarrollamos un software que registra horas de forma inteligente, sin depender de herramientas pesadas de recursos humanos.
 
+Uff Nails es un negocio de estética. Les implementamos un sistema de administración completo y un chatbot de calificación de leads para su equipo comercial.
 
-Listo, por otro lado, con "micasino" hicimos un software que ayuda a que las personas que trabajan con ellos puedan trabajar remoto y puedan controlar las horas que se hacen de forma inteligente sin necesidad de grandes intervenciones o grandes software de recursos humanos, ya que ellos son una empresa que estaban haciendo aquí en Colombia.
+Vialambre es una empresa de manufactura metálica. Les construimos un sistema de cotización inteligente que genera presupuestos a partir de imágenes o descripciones del producto, con IA integrada.
 
-Y listo, otra es implementamos un sistema de administración con uff-nails y también un chatbot que hace lo mismo que el de señor insignia.
-
-
-Listo y para vía alambre hemos hecho un sistema que ayuda a hacer cotizaciones a partir de imágenes o descripciones y implementamos IA con eso.
+Óptica Italiana es una óptica con operación en crecimiento. Los acompañamos con consultoría en IA aplicada a marketing: organizamos sus procesos y datos para que pudieran montar campañas de forma estructurada. Ya tienen varias campañas activas.

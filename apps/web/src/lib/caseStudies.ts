@@ -36,7 +36,8 @@ export function getLocalCaseStudies(): CaseStudyTeaser[] {
       {title: 'Sr. Insignia', tag: 'chatbot'},
       {title: 'micasino', tag: 'software'},
       {title: 'uff-nails', tag: 'chatbot'},
-      {title: 'vía alambre', tag: 'vision'},
+      {title: 'Vialambre', tag: 'vision'},
+      {title: 'Óptica Italiana', tag: 'consultoría'},
     ]
 
     const out: CaseStudyTeaser[] = []
@@ -46,7 +47,7 @@ export function getLocalCaseStudies(): CaseStudyTeaser[] {
       out.push({
         slug: slugify(g.title),
         title: g.title,
-        summary: match.replace(/\s+/g, ' ').slice(0, 220),
+        summary: match.replace(/\s+/g, ' ').slice(0, 300),
         tags: [g.tag],
       })
     }
