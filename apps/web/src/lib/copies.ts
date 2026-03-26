@@ -12,11 +12,11 @@ export type SiteCopies = {
 }
 
 const DEFAULT_COPIES: SiteCopies = {
-  heroTitle: 'IA aplicada, clara y en producción.',
+  heroTitle: 'Tu equipo sabe que necesita IA. Pero nadie te dice por dónde empezar.',
   heroSubtitle:
-    'Construimos soluciones de IA para empresas: chat y agentes, datos y machine learning, gobernanza y consultoría, y software a la medida.',
-  primaryCtaLabel: 'Agenda una reunión',
-  secondaryCtaLabel: 'Ver soluciones',
+    'Cada semana aparece una herramienta nueva. Nosotros te ayudamos a cortar el ruido: primero entendemos tu operación, después construimos lo que de verdad necesitas.',
+  primaryCtaLabel: 'Empecemos por ahí',
+  secondaryCtaLabel: 'Ya sé qué necesito',
   solutionsTitle: 'Soluciones',
   casesTitle: 'Casos de éxito',
   contactTitle: 'Contacto',
