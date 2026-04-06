@@ -1,5 +1,7 @@
 import * as React from 'react'
 
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby1rSQEBNIf0AB9vCJJryFOf7T7CE26GgbNw8Gu6-wLHSP-mZk77HUzIWE6o2Idn6UU/exec'
+
 type Answers = {
   nombre: string
   q1: string
@@ -57,16 +59,13 @@ export function TestAdopcionForm() {
     e.preventDefault()
     setStatus('submitting')
     try {
-      const res = await fetch('/api/test', {
+      await fetch(SCRIPT_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
         body: JSON.stringify(answers),
       })
-      if (res.ok) {
-        setStatus('success')
-      } else {
-        setStatus('error')
-      }
+      setStatus('success')
     } catch {
       setStatus('error')
     }
