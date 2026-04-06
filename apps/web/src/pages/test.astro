@@ -1,0 +1,29 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import SectionHeading from '@/components/SectionHeading.astro'
+import { TestAdopcionForm } from '@/components/TestAdopcionForm'
+---
+
+<BaseLayout
+  title="Test de Adopción IA"
+  description="Responde 12 preguntas rápidas y ayúdanos a entender en qué punto estás con la inteligencia artificial."
+>
+  <div class="container-condor py-14 md:py-20">
+    <SectionHeading
+      title="Test de Adopción IA"
+      subtitle="12 preguntas · ~5 minutos · No hay respuestas correctas o incorrectas."
+    />
+
+    <div class="max-w-2xl mx-auto">
+      <div class="bg-white border-2 border-condor-navy shadow-[4px_4px_0_#031463] p-7 md:p-10">
+        <div
+          class="text-xs font-black text-condor-navy uppercase tracking-widest mb-6"
+          style="font-family: var(--font-condor-mono);"
+        >
+          Equipo Sépa lo decir · Condór Co.
+        </div>
+        <TestAdopcionForm client:load />
+      </div>
+    </div>
+  </div>
+</BaseLayout>
