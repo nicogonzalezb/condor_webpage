@@ -1,0 +1,42 @@
+---
+// Animación de palabras rotantes — CSS puro, sin React ni JS
+// Las 5 palabras están hardcodeadas para que Astro las renderice en el servidor.
+// Todas empiezan con "co" → se resalta "CO" en bold amarillo (brand variant).
+const words = ['company', 'communication', 'collaboration', 'consulting', 'compute']
+---
+
+<!-- Texto accesible estático para screen readers -->
+<span class="sr-only">company</span>
+
+<!-- Animación visual (aria-hidden) -->
+<span aria-hidden="true" class="inline-flex overflow-hidden align-bottom h-[1.15em]">
+  <span class="cowheel-track inline-flex flex-col will-change-transform">
+    {words.map((word) => (
+      <span class="leading-[1.15] h-[1.15em]">
+        <span class="font-black tracking-tight text-condor-yellow text-[1.18em] relative -top-[0.05em]">CO</span><span>{word.slice(2)}</span>
+      </span>
+    ))}
+  </span>
+</span>
+
+<style>
+  /* Ciclo: 5 palabras × 2.2s = 11s totales. Cada palabra se muestra ~1.65s y transiciona en ~0.55s */
+  .cowheel-track {
+    animation: cowheel 11s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cowheel-track {
+      animation: none;
+    }
+  }
+
+  @keyframes cowheel {
+    0%,  15% { transform: translateY(0) }
+    20%, 35% { transform: translateY(-1.15em) }
+    40%, 55% { transform: translateY(-2.3em) }
+    60%, 75% { transform: translateY(-3.45em) }
+    80%, 95% { transform: translateY(-4.6em) }
+    100%     { transform: translateY(0) }
+  }
+</style>
