@@ -61,8 +61,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site)
     </style>
   </head>
   <body>
+    <!-- Skip navigation: permite a usuarios de teclado/screen reader saltar al contenido -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-condor-yellow focus:text-condor-navy focus:font-black focus:text-sm focus:border-2 focus:border-condor-navy focus:shadow-[3px_3px_0_#031463]"
+    >
+      Saltar al contenido principal
+    </a>
     <SiteHeader />
-    <main>
+    <main id="main-content">
       <slot />
     </main>
     <SiteFooter />
