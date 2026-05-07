@@ -73,10 +73,19 @@ Campos:
 
 ### `post` (opcional)
 Uso:
-- blog futuro (no MVP)
+- recursos SEO/editoriales: guías, comparativos, playbooks, opinión y casos de uso
 
 Campos:
 - `title`, `slug`, `excerpt`, `content`, `publishedAt`
+
+Campos recomendados para tráfico:
+- `seoTitle`, `seoDescription`
+- `pillar` (marketing, ventas, agentes, data, adopción, opinión)
+- `audience` (founder, marketing, ventas, operaciones)
+- `intent` (aprender, comparar, implementar, comprar)
+- `targetQuery`
+- `relatedOffer`
+- `updatedAt`
 
 ---
 
@@ -102,5 +111,4 @@ Hoy el sitio usa:
 4. Render:
    - usar `generateStaticParams` + `fetch` en server components
    - o ISR (`revalidate`) si quieren updates sin deploy
-
 
