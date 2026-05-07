@@ -8,6 +8,10 @@ El sistema debe vender una tesis clara:
 
 > Condór implementa IA aplicada a marketing, ventas y operaciones comerciales para empresas B2B en LATAM.
 
+Evolución de posicionamiento:
+
+> Condór transforma empresas B2B en organizaciones AI-first: datos, procesos, infraestructura, automatización, adopción y criterio ejecutivo.
+
 ## Principios
 
 - La home no es el sistema de tráfico. La home es la puerta principal de confianza.
@@ -15,6 +19,51 @@ El sistema debe vender una tesis clara:
 - Las páginas SEO deben conectar con una oferta clara, no solo informar.
 - Medimos primero adquisición y conversión; después optimizamos contenido.
 - La autoridad personal de Nicolás debe transferirse a Condór.
+- Nicolás es la cara de criterio y autoridad; Condór es la capacidad institucional que implementa.
+- Los directorios deben ser activos útiles para el mercado, no páginas creadas solo para capturar keywords.
+
+## Posicionamiento
+
+### Marca personal
+
+Nicolás debe perfilarse como data scientist aplicado a transformación empresarial con IA.
+
+Rol público:
+- Explica cómo pensar con datos e IA.
+- Traduce tecnología a decisiones de negocio.
+- Muestra criterio sobre cuándo implementar IA y cuándo arreglar procesos/datos primero.
+- Publica aprendizajes de implementación, adopción y arquitectura.
+
+Promesa personal:
+
+> Ayudo a líderes B2B a convertir datos, procesos e IA en sistemas que cambian cómo trabaja la empresa.
+
+### Marca empresa
+
+Condór no debe depender de Nicolás para vender cada proyecto.
+
+Rol institucional:
+- Diagnostica madurez AI-first.
+- Diseña arquitectura de datos, automatización y agentes.
+- Implementa sistemas en ciclos de 6 semanas.
+- Capacita equipos para operar lo construido.
+- Mide adopción e impacto.
+
+Promesa de Condór:
+
+> Convertimos empresas B2B en organizaciones AI-first con datos, infraestructura, agentes y adopción operativa.
+
+### Relación Nico + Condór
+
+Modelo recomendado:
+- Nicolás atrae confianza, opinión y conversación.
+- Condór captura demanda, estructura ofertas y entrega proyectos.
+- El contenido personal alimenta páginas de autoridad de Condór.
+- Los casos y directorios hacen que Condór sea más grande que una persona.
+
+Frase interna:
+
+> Nico abre puertas. Condór instala capacidades.
 
 ## Medición mínima
 
@@ -171,6 +220,89 @@ No publicar páginas programáticas si no tienen:
 - CTA relevante.
 - Interlinking con oferta y casos.
 
+### 7. Directorios
+
+Función:
+- Ganar tráfico orgánico con activos de utilidad pública.
+- Construir autoridad de entidad en IA, data science y transformación empresarial.
+- Generar oportunidades de alianzas, charlas, leads y backlinks.
+
+Los directorios funcionan cuando tienen:
+- Datos estructurados.
+- Páginas por entidad.
+- Páginas por categoría/ciudad/industria.
+- Actualización frecuente.
+- Schema markup.
+- Captura de correo o agenda.
+- Curaduría humana.
+
+Directorios recomendados para Condór:
+
+1. Directorio de herramientas de IA para empresas en LATAM
+   - URL base: `/directorio/herramientas-ia`
+   - Páginas: herramienta, categoría, caso de uso, área funcional.
+   - Monetización futura: afiliados, patrocinios, reportes, workshops.
+
+2. Directorio de casos de uso de IA por industria
+   - URL base: `/directorio/casos-uso-ia`
+   - Páginas: industria, área, proceso, nivel de complejidad.
+   - Conecta directo con consultoría e implementación.
+
+3. Directorio de eventos y comunidades de IA/data en Colombia
+   - URL base: `/directorio/eventos-ia-colombia`
+   - Páginas: evento, comunidad, ciudad.
+   - Útil para autoridad, networking, charlas y backlinks.
+
+4. Directorio de prompts, workflows y automatizaciones empresariales
+   - URL base: `/directorio/workflows-ia`
+   - Páginas: área funcional, herramienta, objetivo.
+   - Debe enfocarse en procesos reales, no en prompts genéricos.
+
+5. Directorio de proveedores y talento AI-first en LATAM
+   - URL base: `/directorio/ecosistema-ai-latam`
+   - Páginas: empresa, consultor, comunidad, ciudad, especialidad.
+   - Requiere curaduría fuerte para no competir contra el posicionamiento de Condór.
+
+Directorio inicial recomendado:
+
+> Casos de uso de IA por industria.
+
+Razón:
+- Es el más conectado con venta enterprise.
+- Refuerza a Nicolás como data scientist aplicado.
+- Permite hablar de datos, infraestructura, procesos y ROI.
+- Genera páginas de intención comercial sin depender de noticias/eventos.
+
+Estructura sugerida:
+- `/directorio/casos-uso-ia`
+- `/directorio/casos-uso-ia/ventas`
+- `/directorio/casos-uso-ia/marketing`
+- `/directorio/casos-uso-ia/servicios-profesionales`
+- `/directorio/casos-uso-ia/retail`
+- `/directorio/casos-uso-ia/salud`
+- `/directorio/casos-uso-ia/logistica`
+- `/directorio/casos-uso-ia/[caso]`
+
+Campos mínimos por caso de uso:
+- Título.
+- Industria.
+- Área funcional.
+- Proceso.
+- Problema.
+- Cómo ayuda la IA.
+- Datos necesarios.
+- Integraciones necesarias.
+- Nivel de madurez requerido.
+- Complejidad.
+- Riesgo.
+- Métrica de éxito.
+- Ejemplo de implementación.
+- Oferta relacionada.
+
+CTA recomendado:
+
+> Evalúa qué casos de uso tienen sentido para tu empresa.
+
 ## Taxonomía editorial
 
 ### Pilares
@@ -181,6 +313,8 @@ No publicar páginas programáticas si no tienen:
 4. Data y analítica comercial
 5. Implementación y adopción
 6. Opinión y criterio sobre IA
+7. Madurez AI-first
+8. Infraestructura y gobierno de datos
 
 ### Audiencias
 
@@ -189,6 +323,9 @@ No publicar páginas programáticas si no tienen:
 - Heads de marketing.
 - Equipos de operaciones.
 - Empresas de servicios profesionales.
+- C-levels y juntas directivas.
+- Líderes de transformación digital.
+- Líderes de data/BI.
 
 ### Intenciones
 
@@ -217,24 +354,28 @@ Regla:
 - Crear página de oferta principal.
 - Definir 10 URLs iniciales.
 - Crear hoja/CRM de leads.
+- Definir el primer directorio y su modelo de datos.
 
 ### Semana 2
 
 - Publicar 3 páginas SEO comerciales.
 - Reestructurar 2 casos con formato de conversión.
 - Agregar CTAs internos desde soluciones.
+- Crear template del directorio inicial.
 
 ### Semana 3
 
 - Publicar 3 recursos informativos.
 - Revisar primeras impresiones en Search Console.
 - Ajustar títulos/meta descriptions según CTR.
+- Publicar 10-20 entradas del directorio inicial con QA manual.
 
 ### Semana 4
 
 - Publicar 4 páginas SEO adicionales.
 - Crear dashboard simple de tráfico/leads.
 - Priorizar nuevas páginas según queries reales.
+- Agregar schema, sitemap segmentado e interlinking del directorio.
 
 ## Backlog inicial de contenidos
 
@@ -245,6 +386,9 @@ Regla:
 - Automatización de ventas con IA.
 - Agentes de IA para atención comercial.
 - IA para equipos comerciales B2B.
+- Transformación AI-first para empresas.
+- Consultor data scientist para empresas.
+- Estrategia de datos e IA para empresas B2B.
 
 ### Informativos
 
@@ -253,12 +397,25 @@ Regla:
 - Cómo usar IA en marketing sin llenar tu empresa de herramientas sueltas.
 - Cuándo contratar un consultor de IA y cuándo no.
 - Qué datos necesitas antes de crear un agente de IA.
+- Qué significa ser una empresa AI-first.
+- Qué infraestructura necesita una empresa para implementar IA.
+- Cómo priorizar casos de uso de IA por ROI y complejidad.
 
 ### Opinión/autoridad
 
 - La IA no reemplaza procesos rotos.
 - El problema no es ChatGPT, es la adopción.
 - Por qué las empresas compran demos de IA y no sistemas.
+- El data scientist moderno no solo modela: diseña decisiones.
+- AI-first no es usar más herramientas, es cambiar cómo opera la empresa.
+
+### Directorios
+
+- Casos de uso de IA por industria.
+- Herramientas de IA para equipos comerciales.
+- Comunidades y eventos de IA/data en Colombia.
+- Workflows de IA para marketing, ventas y operaciones.
+- Ecosistema AI-first en LATAM.
 
 ## Decisión actual
 
@@ -269,4 +426,4 @@ Antes de crecer el volumen de contenido, Condór debe tener:
 3. Casos con estructura de confianza.
 4. Una taxonomía editorial.
 5. Un flujo semanal de publicación y revisión.
-
+6. Un primer directorio con datos útiles y foco comercial.
