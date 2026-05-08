@@ -22,6 +22,9 @@ REPO_ROOT=$(pwd) npm run build:web
 node apps/web/dist/server/entry.mjs
 ```
 
+Para Docker/EasyPanel, ver el playbook de fallos nativos de npm:
+[`docs/DOCKER_EASYPANEL_PLAYBOOK.md`](./DOCKER_EASYPANEL_PLAYBOOK.md)
+
 ### Variables de entorno
 
 **SMTP (para envío de emails del formulario):**
