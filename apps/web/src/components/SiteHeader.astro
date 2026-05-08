@@ -1,9 +1,8 @@
 ---
 import { getCalendarUrl } from '@/lib/site'
-import { CoWheel } from './CoWheel'
+import CoWheelCSS from './CoWheelCSS.astro'
 
 const calendarUrl = getCalendarUrl()
-const CO_WORDS = ['company', 'communication', 'collaboration', 'consulting', 'compute']
 ---
 
 <header class="sticky top-0 z-50 bg-condor-navy border-b-2 border-condor-yellow">
@@ -14,12 +13,12 @@ const CO_WORDS = ['company', 'communication', 'collaboration', 'consulting', 'co
         Condor
       </span>
       <span class="hidden md:inline-flex items-baseline text-2xl font-bold tracking-tight text-condor-yellow/60 relative -top-px text-[0.85em] ml-1">
-        <CoWheel client:load words={CO_WORDS} variant="brand" />
+        <CoWheelCSS />
       </span>
     </a>
 
     <!-- Desktop nav -->
-    <nav class="hidden md:flex items-center gap-1 text-sm font-bold">
+    <nav aria-label="Navegación principal" class="hidden md:flex items-center gap-1 text-sm font-bold">
       <a href="/soluciones" class="px-3 py-2 text-condor-yellow/80 hover:text-condor-yellow hover:bg-white/10 transition-colors duration-150 uppercase tracking-wide">
         Soluciones
       </a>
@@ -50,10 +49,10 @@ const CO_WORDS = ['company', 'communication', 'collaboration', 'consulting', 'co
         aria-expanded="false"
         aria-controls="mobile-menu"
       >
-        <svg id="icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg aria-hidden="true" id="icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
-        <svg id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg aria-hidden="true" id="icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
@@ -65,7 +64,7 @@ const CO_WORDS = ['company', 'communication', 'collaboration', 'consulting', 'co
     id="mobile-menu"
     class="hidden md:hidden bg-condor-navy border-t-2 border-condor-yellow/30"
   >
-    <nav class="container-condor py-4 flex flex-col gap-1 text-sm font-bold">
+    <nav aria-label="Menú móvil" class="container-condor py-4 flex flex-col gap-1 text-sm font-bold">
       <a href="/soluciones" class="text-condor-yellow/80 hover:text-condor-yellow hover:bg-white/10 transition-colors py-3 px-2 uppercase tracking-wide">Soluciones</a>
       <a href="/casos" class="text-condor-yellow/80 hover:text-condor-yellow hover:bg-white/10 transition-colors py-3 px-2 uppercase tracking-wide">Casos</a>
       <a href="/contacto" class="text-condor-yellow/80 hover:text-condor-yellow hover:bg-white/10 transition-colors py-3 px-2 uppercase tracking-wide">Contacto</a>

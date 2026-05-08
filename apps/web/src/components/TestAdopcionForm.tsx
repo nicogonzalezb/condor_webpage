@@ -1,9 +1,10 @@
 import * as React from 'react'
 
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx8_YkhebdSUM9zV2BioglxCR7cX0Z8soh83qIJk7wr-3Fftw4GPUl14gFhfFhRn7-T/exec'
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyewSakj7AFTxFikASM-3PEGIw8wLgHGHOWfzIk1IRKDhJpiv7hbm8rdcGGzok5SwAE/exec'
 
 type Answers = {
   nombre: string
+  email: string
   q1: string
   q2: string[]
   q3: string
@@ -20,6 +21,7 @@ type Answers = {
 
 const INITIAL: Answers = {
   nombre: '',
+  email: '',
   q1: '',
   q2: [],
   q3: '',
@@ -96,6 +98,19 @@ export function TestAdopcionForm() {
           value={answers.nombre}
           onChange={e => setField('nombre', e.target.value)}
           placeholder="Tu nombre"
+          className={inputCls}
+        />
+      </div>
+
+      {/* Email */}
+      <div>
+        <Label>¿Cuál es tu correo?</Label>
+        <input
+          required
+          type="email"
+          value={answers.email}
+          onChange={e => setField('email', e.target.value)}
+          placeholder="tu@correo.com"
           className={inputCls}
         />
       </div>

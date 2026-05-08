@@ -1,0 +1,2242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta Comercial - Ecosistema de IA para Vialambre</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0b;
+            --bg-secondary: #111113;
+            --bg-card: #16161a;
+            --bg-card-hover: #1c1c21;
+            --accent-primary: #22c55e;
+            --accent-secondary: #4ade80;
+            --accent-glow: rgba(34, 197, 94, 0.15);
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --border-color: #27272a;
+            --border-accent: rgba(34, 197, 94, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        /* Background Pattern */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(34, 197, 94, 0.08), transparent),
+                radial-gradient(circle at 20% 80%, rgba(34, 197, 94, 0.03), transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Logo Bar */
+        .logo-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 32px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 60px;
+            padding: 12px 24px;
+            background: var(--bg-card);
+            border: 1px dashed var(--border-color);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .logo-placeholder:hover {
+            border-color: var(--border-accent);
+        }
+
+        .logo-placeholder img {
+            max-height: 100%;
+            max-width: 150px;
+            object-fit: contain;
+        }
+
+        .logo-placeholder span {
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Header */
+        header {
+            padding: 60px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent-glow);
+            border: 1px solid var(--border-accent);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--accent-primary);
+            margin-bottom: 32px;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        h1 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 400;
+            line-height: 1.15;
+            margin-bottom: 24px;
+            animation: fadeInUp 0.6s ease-out 0.1s both;
+        }
+
+        h1 span {
+            color: var(--accent-primary);
+            font-style: italic;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeInUp 0.6s ease-out 0.2s both;
+        }
+
+        .meta {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-top: 40px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-color);
+            animation: fadeInUp 0.6s ease-out 0.3s both;
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .meta-value {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        h2 .number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            font-family: 'Manrope', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent-primary);
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 32px 0 16px;
+            color: var(--text-primary);
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        /* Cards */
+        .solution-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .solution-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-accent);
+            transform: translateY(-2px);
+        }
+
+        .solution-card .tag {
+            display: inline-block;
+            background: var(--accent-glow);
+            border: 1px solid var(--border-accent);
+            color: var(--accent-primary);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+        }
+
+        .solution-card h3 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin: 0 0 8px;
+        }
+
+        .solution-card .objective {
+            font-size: 16px;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Feature List */
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            display: flex;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(39, 39, 42, 0.5);
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .feature-list .icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--accent-primary);
+            font-size: 16px;
+        }
+
+        .feature-list .content strong {
+            display: block;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .feature-list .content span {
+            color: var(--text-secondary);
+            font-size: 15px;
+        }
+
+        /* Why Choose Us */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .why-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .why-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-accent);
+        }
+
+        .why-card .icon-wrap {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-glow);
+            border: 1px solid var(--border-accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .why-card h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .why-card p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 32px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-primary), var(--border-color));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 40px;
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 8px;
+            width: 14px;
+            height: 14px;
+            background: var(--bg-primary);
+            border: 2px solid var(--accent-primary);
+            border-radius: 50%;
+        }
+
+        .timeline-item .phase {
+            display: inline-block;
+            background: var(--accent-glow);
+            color: var(--accent-primary);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .timeline-item h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .timeline-item p {
+            font-size: 15px;
+            margin: 0;
+        }
+
+        /* Pricing */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        @media (max-width: 900px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .pricing-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 32px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            background: var(--bg-card-hover);
+            transform: translateY(-4px);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--accent-primary);
+            background: linear-gradient(135deg, var(--bg-card) 0%, rgba(34, 197, 94, 0.05) 100%);
+        }
+
+        .pricing-card.featured::before {
+            content: 'Recomendado';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .pricing-card .name {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .pricing-card h4 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+        }
+
+        .pricing-card .price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        .pricing-card .price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-muted);
+        }
+
+        .pricing-card .period {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .pricing-card .description {
+            font-size: 14px;
+            color: var(--text-secondary);
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Note */
+        .note {
+            background: var(--bg-card);
+            border-left: 3px solid var(--accent-primary);
+            padding: 20px 24px;
+            border-radius: 0 12px 12px 0;
+            margin-top: 32px;
+        }
+
+        .note p {
+            margin: 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* WhatsApp API Section - Blue Highlight */
+        .whatsapp-api-section {
+            background: linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(33, 150, 243, 0.03) 100%);
+            border: 1px solid rgba(33, 150, 243, 0.3);
+            border-radius: 24px;
+            padding: 48px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .whatsapp-api-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #2196f3, #42a5f5, #2196f3);
+        }
+
+        .whatsapp-tabs-container {
+            display: flex;
+            gap: 40px;
+            margin-top: 32px;
+        }
+
+        .whatsapp-tabs-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 240px;
+            flex-shrink: 0;
+        }
+
+        .tab-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 16px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: left;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            border-color: rgba(33, 150, 243, 0.5);
+            background: var(--bg-card-hover);
+        }
+
+        .tab-btn.active {
+            background: rgba(33, 150, 243, 0.1);
+            border-color: #2196f3;
+            color: #2196f3;
+        }
+
+        .whatsapp-tabs-content {
+            flex-grow: 1;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Calculator Styles */
+        .calculator-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 32px;
+        }
+
+        .calc-input-group {
+            margin-bottom: 32px;
+        }
+
+        .calc-input-group label {
+            display: block;
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .calc-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .calc-input {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px 20px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 20px;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .calc-input:focus {
+            outline: none;
+            border-color: #2196f3;
+            box-shadow: 0 0 0 4px rgba(33, 150, 243, 0.1);
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .calc-stat {
+            padding: 24px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+        }
+
+        .calc-stat .label {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .calc-stat .value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .calc-stat .detail {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .calc-stat.marketing { border-left: 3px solid #f59e0b; }
+        .calc-stat.service { border-left: 3px solid #10b981; }
+
+        .calc-total {
+            background: rgba(33, 150, 243, 0.1);
+            border: 1px solid rgba(33, 150, 243, 0.3);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .calc-total .label {
+            font-size: 14px;
+            color: #2196f3;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .calc-total .price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #2196f3;
+            line-height: 1;
+        }
+
+        .calc-total .currency {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .calc-insights {
+            margin-top: 32px;
+            padding-top: 32px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .calc-insights h4 {
+            font-size: 14px;
+            color: #2196f3;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .calc-insights ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .calc-insights li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .calc-insights li::before {
+            content: '✓';
+            color: #2196f3;
+            font-weight: 800;
+        }
+
+        @media (max-width: 850px) {
+            .whatsapp-tabs-container {
+                flex-direction: column;
+            }
+            .whatsapp-tabs-menu {
+                width: 100%;
+                flex-direction: row;
+                overflow-x: auto;
+                padding-bottom: 8px;
+            }
+            .tab-btn {
+                white-space: nowrap;
+            }
+            .calc-grid {
+                grid-template-columns: 1fr;
+            }
+            .calc-insights ul {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .whatsapp-api-section h2 {
+            color: #2196f3;
+            margin-bottom: 8px;
+        }
+
+        .whatsapp-api-section h2 .number {
+            background: rgba(33, 150, 243, 0.2);
+            border-color: #2196f3;
+            color: #2196f3;
+        }
+
+        .whatsapp-api-section .subtitle {
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-bottom: 0;
+        }
+
+        .whatsapp-api-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(33, 150, 243, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+        }
+
+        .whatsapp-api-card h3 {
+            font-family: 'Instrument Serif', Georgia, serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #2196f3;
+            margin-bottom: 16px;
+        }
+
+        .whatsapp-api-price {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin: 24px 0;
+            padding: 24px;
+            background: rgba(33, 150, 243, 0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(33, 150, 243, 0.2);
+        }
+
+        .whatsapp-api-price .price-label {
+            font-size: 14px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .whatsapp-api-price .price-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2196f3;
+            line-height: 1;
+        }
+
+        .whatsapp-api-price .price-currency {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .whatsapp-api-features {
+            margin-top: 32px;
+        }
+
+        .whatsapp-api-features h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #2196f3;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(33, 150, 243, 0.2);
+        }
+
+        .whatsapp-api-features ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .whatsapp-api-features ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 0;
+            color: var(--text-secondary);
+        }
+
+        .whatsapp-api-features ul li::before {
+            content: '✓';
+            color: #2196f3;
+            font-weight: 700;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .whatsapp-api-note {
+            margin-top: 32px;
+            padding: 20px;
+            background: rgba(33, 150, 243, 0.1);
+            border-left: 3px solid #2196f3;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .whatsapp-api-note p {
+            margin: 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .tech-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 12px 20px;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .tech-item:hover {
+            border-color: var(--border-accent);
+        }
+
+        .tech-item .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+        }
+
+        .tech-item span {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.05) 0%, transparent 50%);
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+            margin: 40px 0;
+        }
+
+        .cta-section h2 {
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            max-width: 500px;
+            margin: 0 auto 32px;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 24px rgba(34, 197, 94, 0.3);
+        }
+
+        .cta-button:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(34, 197, 94, 0.4);
+        }
+
+        .cta-button svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Logo Carousel - CSS Only */
+        .social-proof {
+            text-align: center;
+            padding: 48px 40px;
+            background: var(--bg-card);
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            margin-top: 40px;
+            overflow: hidden;
+        }
+
+        .social-proof h4 {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+
+        .logos-track {
+            display: flex;
+            animation: scrollLogos 20s linear infinite;
+            width: max-content;
+        }
+
+        .logos-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scrollLogos {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .logo-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 140px;
+            height: 70px;
+            padding: 16px 24px;
+            margin: 0 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+
+        .logo-item img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: grayscale(100%) brightness(1.5);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .logo-item:hover img {
+            filter: grayscale(0%) brightness(1);
+            opacity: 1;
+        }
+
+        .social-proof .reference-text {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-top: 32px;
+        }
+
+        /* FAQ Accordion */
+        .faq-container {
+            margin-top: 32px;
+        }
+
+        .faq-category {
+            margin-bottom: 24px;
+        }
+
+        .faq-category-title {
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-primary);
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: var(--border-accent);
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            text-align: left;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .faq-question:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 24px;
+            font-weight: 300;
+            color: var(--accent-primary);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            margin-left: 16px;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 1000px;
+        }
+
+        .faq-answer-content {
+            padding: 0 24px 24px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .faq-answer-content p {
+            margin-bottom: 12px;
+        }
+
+        .faq-answer-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .faq-answer-content strong {
+            color: var(--text-primary);
+        }
+
+        .faq-answer-content ul {
+            list-style: none;
+            margin: 12px 0;
+            padding-left: 0;
+        }
+
+        .faq-answer-content ul li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+        }
+
+        .faq-answer-content ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-primary);
+        }
+
+        .faq-answer-content .highlight-box {
+            background: var(--accent-glow);
+            border: 1px solid var(--border-accent);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 12px 0;
+            font-size: 13px;
+        }
+
+        /* Mini CTA */
+        .mini-cta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px 32px;
+            margin-top: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .mini-cta:hover {
+            border-color: var(--border-accent);
+            background: var(--bg-card-hover);
+        }
+
+        .mini-cta-text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .mini-cta-text strong {
+            font-size: 16px;
+            color: var(--text-primary);
+        }
+
+        .mini-cta-text span {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .mini-cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .mini-cta-button:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-2px);
+        }
+
+        .mini-cta-button svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        @media (max-width: 600px) {
+            .mini-cta {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+
+        /* WhatsApp API CTA Button */
+        .whatsapp-api-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #2196f3 0%, #42a5f5 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(33, 150, 243, 0.3);
+            margin-top: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .whatsapp-api-cta:hover {
+            background: linear-gradient(135deg, #42a5f5 0%, #2196f3 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(33, 150, 243, 0.4);
+        }
+
+        .whatsapp-api-cta svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .whatsapp-api-cta-wrapper {
+            text-align: center;
+            margin-top: 32px;
+        }
+
+        /* Main Tabs Navigation */
+        .main-tabs-nav {
+            display: flex;
+            gap: 12px;
+            margin: 40px 0;
+            padding: 8px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            position: sticky;
+            top: 24px;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .main-tab-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 24px;
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-secondary);
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .main-tab-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+        }
+
+        .main-tab-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* IA Tab Active State (Green) */
+        .main-tab-btn.ia-tab.active {
+            background: var(--accent-glow);
+            border-color: var(--border-accent);
+            color: var(--accent-primary);
+            box-shadow: 0 4px 12px rgba(34, 197, 94, 0.1);
+        }
+
+        /* WhatsApp Tab Active State (Blue) */
+        .main-tab-btn.wa-tab.active {
+            background: rgba(33, 150, 243, 0.1);
+            border-color: rgba(33, 150, 243, 0.4);
+            color: #2196f3;
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.1);
+        }
+
+        /* Tab Content Visibility */
+        .main-tab-content {
+            display: none;
+            animation: mainTabFadeIn 0.5s ease-out;
+        }
+
+        .main-tab-content.active {
+            display: block;
+        }
+
+        @keyframes mainTabFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .main-tabs-nav {
+                flex-direction: column;
+                padding: 12px;
+            }
+            .main-tab-btn {
+                padding: 12px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-pattern"></div>
+    
+    <div class="container">
+        <!-- Logo Bar -->
+        <div class="logo-bar">
+            <div class="logo-placeholder">
+                <img src="Condor.png" alt="Condor">
+            </div>
+            <div class="logo-placeholder" style="background: #ffffff;">
+                <img src="vialambre-logo.png" alt="Vialambre">
+            </div>
+        </div>
+
+        <header>
+            <div class="badge">Propuesta Comercial 2025</div>
+            <h1>Ecosistema de <span>IA</span><br>para Vialambre</h1>
+            <p class="subtitle">Optimización del flujo de nuevas oportunidades mediante agentes inteligentes de perfilamiento y auditoría.</p>
+            
+            <div class="whatsapp-api-cta-wrapper">
+                <a href="javascript:void(0)" onclick="switchMainTab('whatsapp-world')" class="whatsapp-api-cta">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.375a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    Ver Configuración WhatsApp API
+                </a>
+            </div>
+            
+            <div class="meta">
+                <div class="meta-item">
+                    <div class="meta-label">Fecha</div>
+                    <div class="meta-value">5 de Diciembre, 2025</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Cliente</div>
+                    <div class="meta-value">Vialambre SAS</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Propuesta</div>
+                    <div class="meta-value">Modular</div>
+                </div>
+            </div>
+
+            <div class="main-tabs-nav">
+                <button class="main-tab-btn ia-tab active" onclick="switchMainTab('ia-world')">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                    </svg>
+                    Ecosistema de IA
+                </button>
+                <button class="main-tab-btn wa-tab" onclick="switchMainTab('whatsapp-world')">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                    </svg>
+                    Configuración API WhatsApp
+                </button>
+            </div>
+        </header>
+
+        <div id="ia-world" class="main-tab-content active">
+            <!-- Resumen Ejecutivo -->
+        <section>
+            <h2><span class="number">01</span>Resumen Ejecutivo</h2>
+            <p>El objetivo de esta propuesta es optimizar el flujo de <strong>"New Opportunities"</strong> (Nuevas Oportunidades) descrito en la página 3 del documento estratégico, mediante la implementación de dos agentes de Inteligencia Artificial.</p>
+            <p>Esta propuesta es <strong>modular</strong>: Las soluciones pueden implementarse de forma independiente o conjunta, según la prioridad estratégica de Vialambre.</p>
+            
+            <h3>Problemas que resolvemos</h3>
+            <ul class="feature-list">
+                <li>
+                    <span class="icon">⚡</span>
+                    <div class="content">
+                        <strong>Inmediatez y Filtrado (Front)</strong>
+                        <span>Garantizar atención inmediata y calificación de leads sin saturar al equipo comercial.</span>
+                    </div>
+                </li>
+                <li>
+                    <span class="icon">✓</span>
+                    <div class="content">
+                        <strong>Cumplimiento de Procesos (Back)</strong>
+                        <span>Asegurar que el equipo humano aplique rigurosamente la metodología BANT.</span>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Solución A -->
+        <section>
+            <h2><span class="number">02</span>Soluciones Propuestas</h2>
+            
+            <div class="solution-card">
+                <span class="tag">Solución A</span>
+                <h3>"El Agente de Perfilamiento" (Bot New.O)</h3>
+                <p class="objective">Proteger el tiempo de los asesores, entregando solo leads listos para cotizar.</p>
+                
+                <p>Este bot actúa en la primera línea (Facebook, Web, WhatsApp). <strong>NO</strong> realiza cotizaciones; su función es filtrar.</p>
+                
+                <ul class="feature-list">
+                    <li>
+                        <span class="icon">🚀</span>
+                        <div class="content">
+                            <strong>Respuesta Inmediata (&lt;1 min)</strong>
+                            <span>Atiende al cliente 24/7 sin tiempos de espera.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="icon">🎯</span>
+                        <div class="content">
+                            <strong>Calificación BANT Natural</strong>
+                            <span>Conversa para obtener: Need (producto), Timing (urgencia), Authority (decisor), Budget (presupuesto).</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="icon">🔀</span>
+                        <div class="content">
+                            <strong>Derivación Inteligente</strong>
+                            <span>Lead Calificado → "Alta Prioridad" para cotización inmediata. Lead Frío → "Baja Prioridad" con información básica.</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="solution-card">
+                <span class="tag">Solución B</span>
+                <h3>"El Auditor de Calidad" (Bot Supervisor)</h3>
+                <p class="objective">Actuar como evaluador comercial experto que audita, analiza y genera insights accionables.</p>
+                
+                <p>Es un bot interno que analiza las transcripciones de los chats en el CRM (Kommo) después de la intervención humana. Va más allá de una simple revisión: actúa como un <strong>coach comercial con IA</strong>.</p>
+                
+                <h4 style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-primary); margin: 24px 0 16px; padding-top: 24px; border-top: 1px solid var(--border-color);">Auditoría de Cumplimiento BANT</h4>
+                
+                <ul class="feature-list">
+                    <li>
+                        <span class="icon">📋</span>
+                        <div class="content">
+                            <strong>Auditoría Automática</strong>
+                            <span>Revisa si el vendedor cumplió el checklist BANT antes de enviar la oferta.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="icon">🔍</span>
+                        <div class="content">
+                            <strong>Detección de Fugas</strong>
+                            <span>Alerta si se están enviando cotizaciones a ciegas (sin preguntar presupuesto o necesidad real).</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="icon">📊</span>
+                        <div class="content">
+                            <strong>Scoring de Vendedores</strong>
+                            <span>Califica a cada vendedor (0-100%) en su adherencia al guión de ventas.</span>
+                        </div>
+                    </li>
+                </ul>
+                
+                <h4 style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-primary); margin: 24px 0 16px; padding-top: 24px; border-top: 1px solid var(--border-color);">Insights Comerciales Inteligentes</h4>
+                
+                <ul class="feature-list">
+                    <li>
+                        <span class="icon">⏱️</span>
+                        <div class="content">
+                            <strong>Análisis de Tiempos de Respuesta</strong>
+                            <span>Detecta y alerta cuando un vendedor responde tarde. <em>"El lead esperó 4 horas. Esto reduce la probabilidad de cierre en un 60%."</em></span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="icon">⚠️</span>
+                        <div class="content">
+                            <strong>Detección de Desviaciones</strong>
+                            <span>Identifica acciones fuera del proceso estándar. <em>"Se ofreció descuento sin haber validado el presupuesto del cliente."</em></span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="icon">💡</span>
+                        <div class="content">
+                            <strong>Oportunidades Perdidas</strong>
+                            <span>Señala momentos donde se pudo cerrar o avanzar la venta. <em>"El cliente mostró urgencia pero no se propuso agendar llamada."</em></span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="icon">📈</span>
+                        <div class="content">
+                            <strong>Patrones de Comportamiento</strong>
+                            <span>Reportes periódicos con tendencias. <em>"Los martes por la tarde el tiempo de respuesta aumenta un 40%."</em></span>
+                        </div>
+                    </li>
+                </ul>
+                
+                <h4 style="font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--accent-primary); margin: 24px 0 16px; padding-top: 24px; border-top: 1px solid var(--border-color);">Alertas y Recomendaciones</h4>
+                
+                <ul class="feature-list">
+                    <li>
+                        <span class="icon">🚨</span>
+                        <div class="content">
+                            <strong>Alertas Críticas</strong>
+                            <span>Notificaciones inmediatas cuando se detectan errores graves en el proceso de venta.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="icon">🎯</span>
+                        <div class="content">
+                            <strong>Sugerencias de Mejora</strong>
+                            <span>Recomendaciones específicas para cada vendedor basadas en su historial de conversaciones.</span>
+                        </div>
+                    </li>
+                    <li>
+                        <span class="icon">📱</span>
+                        <div class="content">
+                            <strong>Dashboard de Rendimiento</strong>
+                            <span>Visibilidad completa del estado de cumplimiento del equipo comercial.</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Mini CTA after solutions -->
+            <div class="mini-cta">
+                <div class="mini-cta-text">
+                    <strong>¿Te interesa alguna de estas soluciones?</strong>
+                    <span>Agenda una llamada para resolver tus dudas</span>
+                </div>
+                <a href="https://calendar.app.google/NWZAK8gyGsnSX2Gr6" target="_blank" class="mini-cta-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5v-5z"/>
+                    </svg>
+                    Agendar reunión
+                </a>
+            </div>
+        </section>
+
+        <!-- Por qué elegirnos -->
+        <section>
+            <h2><span class="number">03</span>¿Por qué elegirnos?</h2>
+            <p>Trabajar con nosotros significa simplicidad, integración nativa y cero curva de aprendizaje.</p>
+            
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="icon-wrap">🤝</div>
+                    <h4>Ya somos su proveedor</h4>
+                    <p>Conocemos sus procesos, su equipo y sus desafíos. Tenemos contexto que otros proveedores tardarían meses en adquirir.</p>
+                </div>
+                <div class="why-card">
+                    <div class="icon-wrap">💰</div>
+                    <h4>Sin costos ocultos</h4>
+                    <p>No cobramos costos de instalación ni desarrollo inicial. Lo que pagas mensualmente es tu costo total. Sin sorpresas ni extras.</p>
+                </div>
+                <div class="why-card">
+                    <div class="icon-wrap">🏆</div>
+                    <h4>Expertos en Kommo</h4>
+                    <p>Al ser sus proveedores de CRM, somos los únicos en Colombia que podemos hacer un desarrollo interno con Kommo sin necesitar una nueva plataforma.</p>
+                </div>
+                <div class="why-card">
+                    <div class="icon-wrap">📚</div>
+                    <h4>Cero capacitación extra</h4>
+                    <p>No necesitan adquirir nuevos conocimientos para usarnos. Su equipo sigue trabajando como siempre.</p>
+                </div>
+                <div class="why-card">
+                    <div class="icon-wrap">🔗</div>
+                    <h4>Mismas plataformas</h4>
+                    <p>Todo funciona en sus sistemas actuales. Sin migraciones, sin nuevas herramientas, sin interrupciones.</p>
+                </div>
+            </div>
+
+            <!-- Social Proof - Logos -->
+            <div class="social-proof">
+                <h4>Empresas que confían en nosotros</h4>
+                <div class="logos-track">
+                    <div class="logo-item"><img src="logo-sr-insignia.png" alt="Sr Insignia"></div>
+                    <div class="logo-item"><img src="logo-uff-nails.png" alt="Uff Nails"></div>
+                    <div class="logo-item"><img src="logo-micasino.png" alt="micasino.com"></div>
+                    <div class="logo-item"><img src="logo-cidi.png" alt="CIDI"></div>
+                    <div class="logo-item"><img src="logo-que-rollo.png" alt="Qué Rollo"></div>
+                    <div class="logo-item"><img src="logo-sr-insignia.png" alt="Sr Insignia"></div>
+                    <div class="logo-item"><img src="logo-uff-nails.png" alt="Uff Nails"></div>
+                    <div class="logo-item"><img src="logo-micasino.png" alt="micasino.com"></div>
+                    <div class="logo-item"><img src="logo-cidi.png" alt="CIDI"></div>
+                    <div class="logo-item"><img src="logo-que-rollo.png" alt="Qué Rollo"></div>
+                </div>
+                <p class="reference-text">Si necesitas referencias comerciales, podemos entregártelas.</p>
+            </div>
+        </section>
+
+        <!-- Cronograma -->
+        <section>
+            <h2><span class="number">04</span>Cronograma de Implementación</h2>
+            <p>Ambas soluciones están diseñadas para un despliegue rápido y pueden implementarse simultáneamente.</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="phase">Semana 1</span>
+                    <h4>Fase 1: Implementación</h4>
+                    <p>Configuración técnica de Bot A y Bot B. Conexión con WhatsApp y Kommo. Carga de guiones iniciales.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="phase">Semana 2+</span>
+                    <h4>Fase 2: Pruebas y Ajuste</h4>
+                    <p>"Marcha Blanca": Monitoreo de conversaciones reales. Ajuste fino de la IA basado en feedback y nueva documentación. Optimización continua de respuestas.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Inversión -->
+        <section>
+            <h2><span class="number">05</span>Inversión Económica</h2>
+            <p>Modelo de recurrencia mensual. Seleccione la solución que mejor se adapte a su presupuesto actual.</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="name">Solución A</div>
+                    <h4>Bot Perfilador</h4>
+                    <div class="price">$1.2<span>M COP</span></div>
+                    <div class="period">por mes</div>
+                    <p class="description">Atención al cliente, filtrado BANT y derivación inteligente en WhatsApp/CRM.</p>
+                </div>
+                <div class="pricing-card">
+                    <div class="name">Solución B</div>
+                    <h4>Bot Auditor</h4>
+                    <div class="price">$1.2<span>M COP</span></div>
+                    <div class="period">por mes</div>
+                    <p class="description">Evaluador comercial experto: auditoría BANT, insights inteligentes, alertas de tiempos y detección de desviaciones.</p>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="name">Pack Completo</div>
+                    <h4>Ecosistema IA Integral</h4>
+                    <div class="price">$2.4<span>M COP</span></div>
+                    <div class="period">por mes</div>
+                    <p class="description">Implementación simultánea de ambas soluciones para máximo impacto.</p>
+                </div>
+            </div>
+            
+            <div class="note">
+                <p><strong>Nota:</strong> Los valores incluyen la configuración, implementación, el periodo de ajustes inicial (Fase 2) y el consumo de tokens de IA.</p>
+                <p style="margin-top: 12px;"><strong>Límite de conversaciones:</strong> Hasta 3,000 conversaciones nuevas al mes. Si se supera este volumen, se aplica un costo adicional de <strong>$250,000 COP por cada 1,000 conversaciones adicionales</strong>.</p>
+                <p style="margin-top: 12px;"><strong>Contrato:</strong> Firma mínima de 1 año.</p>
+            </div>
+        </section>
+
+        <!-- Arquitectura Técnica -->
+        <section>
+            <h2><span class="number">06</span>Arquitectura Técnica</h2>
+            <p>Para la implementación, gestionaremos la integración sobre los sistemas actuales del cliente:</p>
+            
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <span class="dot"></span>
+                    <span>WhatsApp Web vía Kommo</span>
+                </div>
+                <div class="tech-item">
+                    <span class="dot"></span>
+                    <span>CRM Kommo</span>
+                </div>
+                <div class="tech-item">
+                    <span class="dot"></span>
+                    <span>Motor IA (GPT / Claude / Gemini)</span>
+                </div>
+            </div>
+            
+            <div class="note">
+                <p><strong>Nota:</strong> En caso de requerir migración a la API oficial de WhatsApp Business, se deberá negociar por separado.</p>
+            </div>
+
+        </section>
+        </div> <!-- End ia-world -->
+
+        <div id="whatsapp-world" class="main-tab-content">
+        <!-- Configuración WhatsApp API -->
+        <section id="whatsapp-api-section" class="whatsapp-api-section">
+            <h2><span class="number">+</span>Producto Adicional</h2>
+            <p class="subtitle">Ecosistema WhatsApp Business API</p>
+            
+            <div class="whatsapp-tabs-container">
+                <!-- Sidebar Tabs -->
+                <div class="whatsapp-tabs-menu">
+                    <button class="tab-btn active" onclick="switchTab(event, 'calc-tab')">Calculadora de Costos</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'defs-tab')">Definiciones de Mensajes</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'setup-tab')">Configuración e Implementación</button>
+                </div>
+
+                <!-- Content Area -->
+                <div class="whatsapp-tabs-content">
+                    <!-- Tab 1: Calculator -->
+                    <div id="calc-tab" class="tab-content active">
+                        <div class="calculator-card">
+                            <div class="calc-input-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
+                                <div class="calc-input-group" style="margin-bottom: 0;">
+                                    <label for="message-count">Volumen de Mensajes**</label>
+                                    <div class="calc-input-wrapper">
+                                        <input type="number" id="message-count" class="calc-input" value="14718" oninput="calculateCosts()">
+                                    </div>
+                                </div>
+                                <div class="calc-input-group" style="margin-bottom: 0;">
+                                    <label for="service-percent">Mezcla de Servicio (%)</label>
+                                    <div class="calc-input-wrapper">
+                                        <input type="number" id="service-percent" class="calc-input" value="50" min="15" max="99" oninput="calculateCosts()">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="calc-grid">
+                                <div class="calc-stat marketing">
+                                    <div id="marketing-label" class="label">Mensajes de Marketing (10%)</div>
+                                    <div id="marketing-count" class="value">1,472</div>
+                                    <div id="marketing-cost" class="detail">$18.40 USD</div>
+                                </div>
+                                <div class="calc-stat service">
+                                    <div id="service-label" class="label">Mensajes de Servicio (90%)</div>
+                                    <div id="service-count" class="value">13,246</div>
+                                    <div class="detail">$0.00 USD (Gratis*)</div>
+                                </div>
+                            </div>
+
+                            <div class="calc-total">
+                                <div class="label">Costo Total Mensual (Meta)</div>
+                                <div id="total-cost" class="price">$18.40</div>
+                                <div class="currency" style="margin-bottom: 16px;">Dólares Americanos (USD)</div>
+                                
+                                <div style="border-top: 1px dashed rgba(33, 150, 243, 0.3); padding-top: 20px;">
+                                    <div id="total-cost-cop" style="font-size: 1.8rem; color: #2196f3; font-weight: 800; margin-bottom: 8px;">≈ $69,000 COP</div>
+                                    <div style="display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; color: var(--text-muted);">
+                                        <span>Cambio sugerido (TRM): $</span>
+                                        <input type="number" id="exchange-rate" value="3750" oninput="calculateCosts()" 
+                                            style="background: rgba(33, 150, 243, 0.1); border: 1px solid rgba(33, 150, 243, 0.3); border-radius: 6px; color: #2196f3; width: 80px; padding: 4px 8px; font-weight: 700; text-align: center; font-family: inherit; font-size: 14px; outline: none;">
+                                        <span>COP/USD</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="calc-insights">
+                                <h4>💡 Análisis e Insights</h4>
+                                <ul>
+                                    <li>Solo pagas por marketing (10%)</li>
+                                    <li>Servicio (90%) es 100% GRATIS*</li>
+                                    <li>Costos altamente predecibles</li>
+                                    <li>Escalabilidad económica</li>
+                                </ul>
+                                <p style="font-size: 12px; color: var(--text-muted); margin-top: 16px; margin-bottom: 8px;">* Los mensajes de servicio son gratuitos dentro de la ventana de 24 horas. Precios basados en Colombia.</p>
+                                <p style="font-size: 12px; color: var(--text-muted); margin-top: 0; font-style: italic;">** El volumen inicial (14,718) es el promedio de los últimos 3 meses de Vialambre. Este valor puede variar, por lo que hemos diseñado esta herramienta para sus proyecciones.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab 2: Definitions -->
+                    <div id="defs-tab" class="tab-content">
+                        <div class="calculator-card">
+                            <div class="calc-insights" style="margin-top: 0; padding-top: 0; border-top: none;">
+                                <div style="margin-bottom: 32px;">
+                                    <h4 style="color: #10b981; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                                        <span style="width: 12px; height: 12px; background: #10b981; border-radius: 50%;"></span>
+                                        Mensajes de Servicio (Gratis*)
+                                    </h4>
+                                    <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6;">
+                                        Son mensajes que permiten administrar las consultas de los clientes, ya sea a través de un agente o de un bot con inteligencia artificial conversacional.
+                                    </p>
+                                    <div style="background: rgba(16, 185, 129, 0.1); border-left: 3px solid #10b981; padding: 16px; margin-top: 12px; border-radius: 0 8px 8px 0;">
+                                        <p style="font-size: 13px; color: var(--text-secondary); margin: 0;">
+                                            <strong>Ventana de 24 horas:</strong> Cuando un usuario escribe, se abre una ventana de atención de 24 horas. Dentro de este tiempo, las respuestas de la empresa son <strong>sin costo</strong>. Esta ventana se reinicia con cada mensaje nuevo del usuario.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h4 style="color: #f59e0b; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                                        <span style="width: 12px; height: 12px; background: #f59e0b; border-radius: 50%;"></span>
+                                        Mensajes de Marketing
+                                    </h4>
+                                    <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6;">
+                                        Ayudan a las empresas a alcanzar objetivos estratégicos: desde generar reconocimiento hasta impulsar ventas y hacer retargeting. 
+                                    </p>
+                                    <ul style="list-style: none; padding: 0; margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                                        <li style="font-size: 13px; color: var(--text-muted); display: flex; align-items: center; gap: 8px;">
+                                            <span style="color: #f59e0b;">•</span> Ofertas y promociones
+                                        </li>
+                                        <li style="font-size: 13px; color: var(--text-muted); display: flex; align-items: center; gap: 8px;">
+                                            <span style="color: #f59e0b;">•</span> Sugerencias de productos
+                                        </li>
+                                        <li style="font-size: 13px; color: var(--text-muted); display: flex; align-items: center; gap: 8px;">
+                                            <span style="color: #f59e0b;">•</span> Carritos abandonados
+                                        </li>
+                                        <li style="font-size: 13px; color: var(--text-muted); display: flex; align-items: center; gap: 8px;">
+                                            <span style="color: #f59e0b;">•</span> Recordatorios y avisos
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab 3: Setup Info -->
+                    <div id="setup-tab" class="tab-content">
+                        <div class="whatsapp-api-card">
+                            <h3>Configuración de WhatsApp Business API</h3>
+                            <p>Ofrecemos la <strong>configuración completa de la API oficial de WhatsApp Business</strong> como un servicio adicional a la propuesta principal.</p>
+                            
+                            <div class="whatsapp-api-price">
+                                <span class="price-label">Inversión</span>
+                                <span class="price-value">$800</span>
+                                <span class="price-currency">mil COP</span>
+                            </div>
+                            <p style="text-align: center; color: var(--text-muted); font-size: 14px; margin-top: -16px;">Pago único</p>
+                            
+                            <div class="whatsapp-api-features">
+                                <h4>¿Qué incluye?</h4>
+                                <ul>
+                                    <li>Configuración inicial en Meta Developers</li>
+                                    <li>Integración técnica y Webhooks</li>
+                                    <li>Pruebas de funcionamiento y validación</li>
+                                    <li>Soporte durante la migración</li>
+                                </ul>
+                            </div>
+
+                            <div class="whatsapp-api-note">
+                                <p><strong>Nota:</strong> Este servicio es independiente y puede contratarse de forma adicional. Los costos mensuales de Meta se gestionan aparte.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </div> <!-- End whatsapp-world -->
+
+        <!-- CTA -->
+        <div class="cta-section">
+            <h2>¿Listos para empezar?</h2>
+            <p>Optimice su proceso de ventas con IA diseñada específicamente para su flujo de trabajo actual.</p>
+            <a href="https://calendar.app.google/NWZAK8gyGsnSX2Gr6" target="_blank" class="cta-button">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zm-7 5h5v5h-5v-5z"/>
+                </svg>
+                Agendar una reunión
+            </a>
+        </div>
+
+        <!-- FAQ Section -->
+        <section>
+            <h2><span class="number">07</span>Sus Preguntas, Respondidas</h2>
+            <p>Respuestas a las consultas que nos han compartido sobre esta propuesta.</p>
+            
+            <div class="faq-container">
+                <!-- Integración y Funcionamiento Técnico -->
+                <div class="faq-category">
+                    <div class="faq-category-title">Integración y Funcionamiento Técnico</div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">¿WhatsApp Web o API oficial?</button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>La propuesta actual está cotizada sobre <strong>WhatsApp Web</strong>, que es como ustedes tienen configurado Kommo actualmente (escanean un QR, igual que cuando usan WhatsApp Web en el navegador).</p>
+                                <p>Sin embargo, <strong>sí podemos implementar la API oficial de WhatsApp Business</strong> y de hecho lo recomendamos por sus ventajas en estabilidad y funcionalidades, aunque conlleva costos adicionales.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">¿Cómo funciona la migración a API de WhatsApp Business?</button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p><strong>Costos:</strong> Meta cobra por cada mensaje enviado a través de la API, lo cual representa un costo adicional variable según volumen.</p>
+                                <p><strong>Tiempos y dependencias:</strong> Requiere una reunión para evaluar qué tienen ustedes adelantado en la parte de Meta Developers, qué debemos hacer nosotros y qué debe hacer Vialambre. Por esto, sería una <strong>cotización aparte</strong> que depende del avance que tengan con este proyecto.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">¿Los bots son completamente configurables?</button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Sí, tanto el bot perfilador como el bot auditor son <strong>completamente configurables</strong>. Nosotros nos encargamos de la parte técnica de implementación, pero ustedes —como expertos en su negocio— definen la lógica, los criterios de calificación y los flujos que mejor se adapten a su operación.</p>
+                                <p>Además, todo este proceso de configuración se irá trabajando y refinando en nuestras reuniones de feedback, que se programarán desde el momento de la firma del contrato para asegurar que los bots respondan de acuerdo con las necesidades de su operación.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">¿Quién asume el mantenimiento ante cambios de WhatsApp o Kommo?</button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p><strong>Nosotros asumimos el mantenimiento y los ajustes necesarios</strong> para que todo siga funcionando correctamente. Esto está cubierto dentro del plan mensual.</p>
+                                <div class="highlight-box">
+                                    <strong>Aclaración importante:</strong> Dado que Meta está cambiando constantemente sus políticas con WhatsApp Web y Kommo depende de esa conexión, si algo cambia entre ellos que afecte la integración, sería un tema de Kommo y no seríamos responsables de esos ajustes. Por esta razón, <strong>recomendamos migrar a la API oficial de Meta</strong>.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">¿Se requiere mantener sesión activa en WhatsApp Web?</button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Con la conexión vía WhatsApp Web, los mecanismos son los mismos que ya manejan con Kommo: es necesario <strong>abrir la sesión del celular al menos una vez a la semana</strong> para mantener la conexión activa.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Rendimiento, KPIs y Fiabilidad -->
+                <div class="faq-category">
+                    <div class="faq-category-title">Rendimiento, KPIs y Fiabilidad</div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">¿Cuentan con benchmarks de calidad del filtrado BANT?</button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Los resultados de ventas dependen del tipo de calificación que manejen ustedes internamente. Nuestro compromiso con la metodología específica llega hasta el punto en que nuestros bots califican y asignan una <strong>"temperatura"</strong> al lead (similar al sistema que manejamos con Sr. Insignia).</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">¿Qué KPIs mide el informe del bot y cómo se calculan?</button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>El dashboard mide:</p>
+                                <ul>
+                                    <li><strong>Tiempos de respuesta</strong> de cada asesor</li>
+                                    <li><strong>Calidad de las respuestas</strong> según el guión establecido</li>
+                                    <li><strong>Cumplimiento del guión:</strong> la IA revisa cada conversación contra la documentación de cómo debería manejarse</li>
+                                    <li><strong>Volumen de mensajes entrantes por período</strong>, que pueden cruzar con campañas activas para optimizar su estrategia comercial</li>
+                                </ul>
+                                <p>Al final, el informe genera además <strong>insights</strong> clave sobre desempeño y oportunidades de mejora.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">¿El bot auditor alerta o limita al asesor?</button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>El bot auditor <strong>no bloquea ni lanza alertas en tiempo real</strong>. Funciona de la siguiente manera: después de cada conversación, genera una calificación que se envía como <strong>insight de cada conversación</strong>. Es un sistema de evaluación posterior, no de intervención activa, que será visible en el dashboard mencionado anteriormente.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">¿Cómo funciona la toma de decisiones de la IA?</button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Los modelos de IA que utilizamos son <strong>probabilísticos</strong>, lo que significa que toman decisiones basándose en patrones aprendidos de millones de conversaciones reales. El modelo analiza:</p>
+                                <ul>
+                                    <li><strong>Contexto completo de la conversación:</strong> no solo palabras clave aisladas</li>
+                                    <li><strong>Intención del cliente:</strong> qué está buscando realmente</li>
+                                    <li><strong>Patrones de comportamiento:</strong> cómo responden clientes similares</li>
+                                    <li><strong>Criterios de calificación que ustedes definen:</strong> presupuesto, autoridad, necesidad, tiempo (BANT)</li>
+                                </ul>
+                                <p>La precisión se ajusta de forma iterativa según las necesidades específicas que ustedes nos indiquen durante las reuniones de feedback.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">¿Cuánto tiempo para obtener resultados confiables?</button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Los resultados <strong>consistentes</strong> se obtienen desde el día 1, dependiendo de la calidad de la documentación que ustedes nos proporcionen. En nuestra experiencia, <strong>en 3 a 4 semanas</strong> después de habilitar el bot y con el feedback del equipo comercial, la herramienta comenzará a ofrecer resultados cada vez más afinados.</p>
+                                <p>La IA mejora a medida que procesa más casos y recibe retroalimentación. Al inicio nos reunimos con frecuencia para ajustar; con el tiempo, las reuniones de calibración se espacian.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Seguridad, Privacidad y Cumplimiento -->
+                <div class="faq-category">
+                    <div class="faq-category-title">Seguridad, Privacidad y Cumplimiento</div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">¿Dónde se almacenan los datos?</button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Los datos se almacenan en <strong>servidores propios administrados por nosotros, alojados en AWS (Amazon Web Services)</strong>, con ubicación en Estados Unidos.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">¿Cómo garantizan cumplimiento de protección de datos (Habeas Data)?</button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Contamos con <strong>políticas de manejo de datos personales</strong> que cumplen con la normativa aplicable. Tanto nosotros como AWS cumplimos con estándares de protección de datos personales.</p>
+                                <div class="highlight-box">
+                                    <strong>Importante:</strong> Es responsabilidad del cliente asegurarse de contar con todos los <strong>opt-in y autorizaciones necesarias</strong> para el tratamiento de datos personales de las personas que interactúen con el bot, conforme a la Ley de Habeas Data.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">¿Podemos exportar todo el histórico?</button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>Sí, <strong>desde el momento en que se implemente el sistema</strong> podrán exportar conversaciones, métricas y evaluaciones. No es posible recuperar conversaciones anteriores a la implementación.</p>
+                                <p>La capacidad de exportación también está sujeta a las <strong>políticas de Meta</strong> respecto al almacenamiento y acceso a conversaciones de WhatsApp. Dependiendo del volumen de información acumulada, la exportación masiva de datos <strong>podría generar costos adicionales</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Costos, Soporte y Escalabilidad -->
+                <div class="faq-category">
+                    <div class="faq-category-title">Costos, Soporte y Escalabilidad</div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">¿Qué incluye el precio mensual?</button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>El precio mensual <strong>sí incluye</strong>:</p>
+                                <ul>
+                                    <li>Ajustes de guiones</li>
+                                    <li>Mantenimiento técnico</li>
+                                    <li>Corrección de errores</li>
+                                    <li>Soporte por horas mensuales</li>
+                                </ul>
+                                <p>Los detalles específicos del alcance se formalizarán en el contrato.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">¿Existe límite de conversaciones? ¿Cómo escala el costo?</button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                <p>La propuesta actual contempla un límite de <strong>aproximadamente 3,000 conversaciones nuevas al mes</strong>.</p>
+                                <p>Si la demanda crece más allá de este volumen, el costo se incrementa en <strong>$250,000 COP adicionales por cada 1,000 conversaciones nuevas</strong>. Aplicables desde el siguiente cohorte comercial con aviso previo obligatorio.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Propuesta elaborada para Vialambre SAS — Diciembre 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        // FAQ Accordion functionality
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const faqItem = button.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all other FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Toggle current item
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        // WhatsApp Tabs Functionality
+        function switchTab(evt, tabId) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            tabBtns.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+
+        // Calculator Logic
+        function calculateCosts() {
+            const countInput = document.getElementById('message-count');
+            const servicePercentInput = document.getElementById('service-percent');
+            const exchangeRateInput = document.getElementById('exchange-rate');
+            
+            let count = parseInt(countInput.value) || 0;
+            let servicePercent = parseFloat(servicePercentInput.value) || 50;
+            let exchangeRate = parseFloat(exchangeRateInput.value) || 3750;
+
+            // Constrain service percentage between 15 and 99
+            if (servicePercent < 15) {
+                servicePercent = 15;
+                servicePercentInput.value = 15;
+            }
+            if (servicePercent > 99) {
+                servicePercent = 99;
+                servicePercentInput.value = 99;
+            }
+            
+            // Calculate percentages (servicePercent is the percentage of service messages)
+            const marketingPercent = (100 - servicePercent) / 100;
+            const servicePercentDecimal = servicePercent / 100;
+            const marketingRate = 0.0125;
+            
+            // Calculate counts ensuring they add up to total
+            const marketingCount = Math.round(count * marketingPercent);
+            const serviceCount = count - marketingCount;
+            const marketingCostUSD = marketingCount * marketingRate;
+            const totalCostCOP = marketingCostUSD * exchangeRate;
+
+            // Update Labels with calculated percentages (not input values)
+            const actualMarketingPercent = count > 0 ? Math.round((marketingCount / count) * 100) : 0;
+            const actualServicePercent = count > 0 ? Math.round((serviceCount / count) * 100) : 0;
+            
+            document.getElementById('marketing-label').innerText = `Mensajes de Marketing (${actualMarketingPercent}%)`;
+            document.getElementById('service-label').innerText = `Mensajes de Servicio (${actualServicePercent}%)`;
+
+            // Update Values
+            document.getElementById('marketing-count').innerText = marketingCount.toLocaleString();
+            document.getElementById('service-count').innerText = serviceCount.toLocaleString();
+            document.getElementById('marketing-cost').innerText = `$${marketingCostUSD.toFixed(2)} USD`;
+            document.getElementById('total-cost').innerText = `$${marketingCostUSD.toFixed(2)}`;
+            document.getElementById('total-cost-cop').innerText = `≈ $${Math.round(totalCostCOP).toLocaleString()} COP`;
+        }
+
+        // Initialize calculator
+        window.addEventListener('load', calculateCosts);
+
+        // Main Tabs Functionality
+        function switchMainTab(tabId) {
+            // Hide all main tab contents
+            const contents = document.querySelectorAll('.main-tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            // Remove active class from all main tab buttons
+            const buttons = document.querySelectorAll('.main-tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Show selected tab content
+            const activeContent = document.getElementById(tabId);
+            if (activeContent) {
+                activeContent.classList.add('active');
+            }
+
+            // Set active class on corresponding button
+            const activeBtn = document.querySelector(`.main-tab-btn[onclick*="${tabId}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+
+            // Scroll to top of content with offset for sticky nav
+            const nav = document.querySelector('.main-tabs-nav');
+            if (nav) {
+                const topPos = nav.offsetTop - 24; 
+                window.scrollTo({
+                    top: topPos,
+                    behavior: 'smooth'
+                });
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

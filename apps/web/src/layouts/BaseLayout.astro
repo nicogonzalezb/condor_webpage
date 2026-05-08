@@ -63,13 +63,8 @@ const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID
       </>
     )}
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Fuentes self-hosted: preload de Montserrat (crítica para el hero H1) -->
+    <link rel="preload" href="/fonts/montserrat-latin.woff2" as="font" type="font/woff2" crossorigin />
     <style>
       :root {
         --font-condor-sans: 'Montserrat', system-ui, sans-serif;
@@ -79,8 +74,15 @@ const gaMeasurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID
     </style>
   </head>
   <body>
+    <!-- Skip navigation: permite a usuarios de teclado/screen reader saltar al contenido -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-condor-yellow focus:text-condor-navy focus:font-black focus:text-sm focus:border-2 focus:border-condor-navy focus:shadow-[3px_3px_0_#031463]"
+    >
+      Saltar al contenido principal
+    </a>
     <SiteHeader />
-    <main>
+    <main id="main-content">
       <slot />
     </main>
     <SiteFooter />
