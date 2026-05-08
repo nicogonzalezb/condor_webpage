@@ -9,9 +9,8 @@
     "deploy": "sanity deploy"
   },
   "dependencies": {
-    "@sanity/vision": "^3.92.0",
-    "sanity": "^3.92.0"
+    "@sanity/vision": "^5.24.0",
+    "sanity": "^5.14.1",
+    "styled-components": "^6.4.1"
   }
 }
-
-

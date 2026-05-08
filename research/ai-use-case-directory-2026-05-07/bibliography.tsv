@@ -1,0 +1,40 @@
+url	titulo	fecha	tier	nota_de_uso
+https://www.census.gov/naics/?r=prd-plgs	North American Industry Classification System, U.S. Census Bureau	2022 NAICS; consultado 2026-05-07	Tier A	Fuente oficial para clasificar industrias; base recomendada para taxonomia inicial.
+https://www.naics.com/naics-code-description/?code=541511	NAICS Code 541511 - Custom Computer Programming Services	consultado 2026-05-07	Tier B	Referencia secundaria util para ejemplos legibles de codigos NAICS; no sustituye Census.
+https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10	Artificial Intelligence Risk Management Framework AI RMF 1.0	2023-01-26; consultado 2026-05-07	Tier A	Fuente primaria para riesgos, gobernanza y estructura de validacion de fichas.
+https://www.nist.gov/itl/ai-risk-management-framework	AI Risk Management Framework, NIST	2023-01-26; consultado 2026-05-07	Tier A	Contexto oficial sobre proceso abierto y consenso del AI RMF.
+https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence	Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile	2024-07-26; consultado 2026-05-07	Tier A	Complemento para riesgos especificos de IA generativa.
+https://www.oecd.org/en/topics/ai-principles.html	OECD AI Principles	2019; actualizado 2024; consultado 2026-05-07	Tier A	Marco internacional primario para principios, transparencia, robustez y accountability.
+https://www.oecd.org/digital/oecd-updates-ai-principles-to-stay-abreast-of-rapid-technological-developments.htm	OECD updates AI Principles	2024-05-03; consultado 2026-05-07	Tier A	Fecha y alcance de la actualizacion 2024 de los principios OECD.
+https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng	Regulation (EU) 2024/1689 Artificial Intelligence Act	2024-07-12; consultado 2026-05-07	Tier A	Fuente legal primaria para clasificacion de riesgo, obligaciones y Annex III.
+https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-enabled-medical-devices	Artificial Intelligence-Enabled Medical Devices, FDA	consultado 2026-05-07	Tier A	Registro oficial sectorial; benchmark de fichas con autorizacion, area medica y dispositivo.
+https://www.fda.gov/medical-devices/software-medical-device-samd/artificial-intelligence-software-medical-device	Artificial Intelligence in Software as a Medical Device, FDA	consultado 2026-05-07	Tier A	Contexto regulatorio para casos de uso en salud y software medico.
+https://clinicaltrials.gov/	ClinicalTrials.gov	consultado 2026-05-07	Tier A	Benchmark de registry publico con estados, sponsors, condiciones y resultados.
+https://www.niams.nih.gov/grants-funding/conducting-clinical-research/register-trials-gov	Register with ClinicalTrials.gov	consultado 2026-05-07	Tier A	Explica funcion de ClinicalTrials.gov como base de estudios NIH, agencias y privados.
+https://attack.mitre.org/	MITRE ATT&CK	consultado 2026-05-07	Tier A	Benchmark de taxonomia operacional con tacticas, tecnicas, mitigaciones y fuentes de datos.
+https://www.mitre.org/focus-areas/cybersecurity/mitre-attack	MITRE ATT&CK overview	consultado 2026-05-07	Tier A	Descripcion primaria del proposito del knowledge base.
+https://www.nist.gov/itl/nvd	National Vulnerability Database, NIST	consultado 2026-05-07	Tier A	Benchmark de base oficial con enriquecimiento estructurado y dependencia de CVE.
+https://nvd.nist.gov/developers/vulnerabilities	NVD Vulnerability APIs	consultado 2026-05-07	Tier A	Referencia para modelo API, identificadores, data types y operaciones de repositorio.
+https://cve.mitre.org/cve/identifiers/index.html	CVE - About CVE Records	consultado 2026-05-07	Tier A	Referencia primaria para identificadores unicos de vulnerabilidades publicas.
+https://www.cve.org/	CVE Program	consultado 2026-05-07	Tier A	Fuente primaria del programa CVE y terminos de uso.
+https://www.cncf.io/	Cloud Native Computing Foundation	consultado 2026-05-07	Tier A	Fuente institucional para landscape cloud native.
+https://github.com/cncf/landscape	CNCF Landscape GitHub repository	consultado 2026-05-07	Tier A	Benchmark de directorio/landscape con datos abiertos, filtros y campos operativos.
+https://landscape.cncf.io/	CNCF Cloud Native Landscape	consultado 2026-05-07	Tier A	Benchmark visual interactivo de productos, proyectos y categorias.
+https://developers.google.com/search/docs/appearance/structured-data/dataset	Dataset structured data, Google Search Central	consultado 2026-05-07	Tier A	Documentacion oficial para Dataset, DataCatalog y DataDownload.
+https://developers.google.com/search/docs/fundamentals/creating-helpful-content	Creating helpful, reliable, people-first content, Google Search Central	consultado 2026-05-07	Tier A	Criterio oficial para evitar contenido creado solo para ranking.
+https://schema.org/Dataset	Schema.org Dataset	consultado 2026-05-07	Tier A	Vocabulario canonico para Dataset, DataCatalog, distribucion y metadata.
+https://schema.org/DefinedTerm	Schema.org DefinedTerm	consultado 2026-05-07	Tier A	Util para modelar taxonomias de industria, proceso, actor y riesgo.
+https://oecd.ai/en/incidents/	OECD AI Incidents and Hazards Monitor	consultado 2026-05-07	Tier A	Base OECD para incidentes/hazards; benchmark de taxonomia de riesgos.
+https://www.oecd-ilibrary.org/en/topics/ai-risks-and-incidents.html	OECD AI risks and incidents	consultado 2026-05-07	Tier A	Contexto oficial de AIM y esquemas de reporte interoperables.
+https://incidentdatabase.ai/	AI Incident Database	consultado 2026-05-07	Tier B	Base independiente de incidentes; util como benchmark pero no fuente gubernamental.
+https://hai.stanford.edu/ai-index/2025-ai-index-report	The 2025 AI Index Report, Stanford HAI	2025; consultado 2026-05-07	Tier B	Informe academico reconocido para contexto de adopcion, economia y gobernanza.
+https://hai.stanford.edu/assets/files/hai_ai_index_report_2025.pdf	AI Index Report 2025 PDF	2025; consultado 2026-05-07	Tier B	Fuente extensa para tendencias; usar como contexto, no como validacion de fichas individuales.
+https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai	State of AI, McKinsey	consultado 2026-05-07	Tier B	Encuesta privada util para contexto de adopcion; requiere cautela por metodologia y sesgo comercial.
+https://www.gartner.com/en/information-technology/glossary/artificial-intelligence-ai	Gartner definition of AI	consultado 2026-05-07	Tier B	Definicion de mercado; util para lenguaje empresarial, no para validacion primaria.
+https://www.g2.com/categories/artificial-intelligence	G2 Artificial Intelligence Software	consultado 2026-05-07	Tier B	Benchmark de directorio comercial de productos; sesgos por reviews/patrocinio.
+https://www.capterra.com/artificial-intelligence-software/	Capterra Artificial Intelligence Software	consultado 2026-05-07	Tier B	Benchmark de marketplace de software; sesgos comerciales y de afiliacion.
+https://www.producthunt.com/topics/artificial-intelligence	Product Hunt Artificial Intelligence	consultado 2026-05-07	Tier B	Benchmark de discovery social de productos; util para UX, no para evidencia empresarial.
+https://www.kaggle.com/datasets	Kaggle Datasets	consultado 2026-05-07	Tier B	Benchmark de catalogo de datasets/comunidad; calidad variable por contribucion abierta.
+https://huggingface.co/models	Hugging Face Models	consultado 2026-05-07	Tier B	Benchmark de registry tecnico de modelos; util para campos de metadata, licencias y uso.
+https://paperswithcode.com/	Papers with Code	consultado 2026-05-07	Tier B	Benchmark tecnico de tareas, datasets, papers y benchmarks; no es registro regulatorio.
+https://mlcommons.org/	MLCommons	consultado 2026-05-07	Tier B	Benchmark de medicion tecnica estandarizada; util como referencia de evaluacion, no de casos empresariales.
