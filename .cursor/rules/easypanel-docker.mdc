@@ -1,0 +1,24 @@
+---
+description: Debug EasyPanel Docker deploy failures for this Astro monorepo
+globs:
+  - "Dockerfile"
+  - "apps/web/Dockerfile"
+  - "package.json"
+  - "package-lock.json"
+  - "docs/DOCKER_EASYPANEL_PLAYBOOK.md"
+alwaysApply: false
+---
+
+# EasyPanel Docker Deploys
+
+When working on Docker/EasyPanel deployment failures in this repo, first read:
+
+`docs/DOCKER_EASYPANEL_PLAYBOOK.md`
+
+Project defaults:
+
+- Use `node:20-bookworm-slim`, not `node:20-alpine`.
+- Install with `npm ci` in Docker.
+- Keep the root `Dockerfile` and `apps/web/Dockerfile` synchronized.
+- Missing native packages like `@rollup/rollup-linux-x64-gnu`, `lightningcss-linux-x64-gnu`, or `@tailwindcss/oxide-linux-x64-gnu` are usually npm optional dependency lockfile issues, not app-code bugs.
+- If adding Linux native optional dependencies, regenerate `package-lock.json` with `npm install --package-lock-only --force`, then verify the lockfile contains a real `node_modules/<package>` entry.
