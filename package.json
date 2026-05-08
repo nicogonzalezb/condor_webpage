@@ -4,9 +4,6 @@
   "workspaces": [
     "apps/*"
   ],
-  "optionalDependencies": {
-    "@rollup/rollup-linux-x64-musl": "4.60.3"
-  },
   "scripts": {
     "dev": "REPO_ROOT=$(pwd) npm run dev -w @condor/web",
     "dev:web": "REPO_ROOT=$(pwd) npm run dev -w @condor/web",

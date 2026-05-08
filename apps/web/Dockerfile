@@ -4,7 +4,7 @@
 #   docker run -p 3000:3000 condor-web
 
 # ── Stage 1: Build ────────────────────────────────────────────────────────────
-FROM node:20-alpine AS builder
+FROM node:20-bookworm-slim AS builder
 WORKDIR /app
 
 # Copy root workspace manifest first (better layer caching)
@@ -30,7 +30,7 @@ WORKDIR /app/apps/web
 RUN REPO_ROOT=/app npm run build
 
 # ── Stage 2: Runtime ──────────────────────────────────────────────────────────
-FROM node:20-alpine
+FROM node:20-bookworm-slim
 WORKDIR /app
 
 # Copy the built output
