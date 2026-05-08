@@ -15,7 +15,7 @@ COPY apps/web/package.json ./apps/web/package.json
 COPY apps/studio/package.json ./apps/studio/package.json
 
 # Install all workspace dependencies (hoisted to /app/node_modules)
-RUN npm install --prefer-offline
+RUN npm ci
 
 # Copy web app source
 COPY apps/web ./apps/web

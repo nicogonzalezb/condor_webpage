@@ -9,7 +9,7 @@ COPY package.json package-lock.json ./
 COPY apps/web/package.json ./apps/web/package.json
 COPY apps/studio/package.json ./apps/studio/package.json
 
-RUN npm install --prefer-offline
+RUN npm ci
 
 COPY apps/web ./apps/web
 COPY brand ./brand
