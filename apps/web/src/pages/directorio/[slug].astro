@@ -18,9 +18,14 @@ const ficha = await sanity.fetch<{
   kpis: string[]
   complejidad: string
   regulacion: string[]
+  tipoIA: string | null
+  faseAdopcion: string | null
+  nivelEvidencia: string | null
+  fechaRevision: string | null
+  revisadoPor: string | null
   fuentes: { titulo: string; url: string; tier: 'A' | 'B' }[]
 } | null>(`
-  *[_type == "useCaseFicha" && slug.current == $slug][0] {
+  *[_type == "useCaseFicha" && slug.current == $slug && (!defined(estadoPublicacion) || estadoPublicacion == "publicado")][0] {
     title,
     industria,
     areaFuncional,
@@ -31,11 +36,61 @@ const ficha = await sanity.fetch<{
     kpis,
     complejidad,
     regulacion,
+    tipoIA,
+    faseAdopcion,
+    nivelEvidencia,
+    fechaRevision,
+    revisadoPor,
     fuentes
   }
 `, { slug })
 
 if (!ficha) return Astro.redirect('/404')
+
+const nivelEvidenciaLabels: Record<string, string> = {
+  observacional: 'Observacional — marcos y guías',
+  piloto_benchmark: 'Piloto o benchmark sectorial',
+  produccion_documentada: 'Producción documentada',
+}
+
+const tipoIALabels: Record<string, string> = {
+  predictivo: 'Predictivo',
+  generativo: 'Generativo',
+  recomendacion: 'Recomendación',
+  clasificacion: 'Clasificación',
+  vision: 'Visión por computador',
+  nlp: 'NLP',
+  agentes: 'Agentes / orquestación',
+  optimizacion: 'Optimización',
+}
+
+const faseAdopcionLabels: Record<string, string> = {
+  exploracion: 'Exploración',
+  piloto: 'Piloto',
+  escala: 'Escala',
+  optimizacion: 'Optimización',
+}
+
+function formatFechaRevision(iso: string | null | undefined): string | null {
+  if (!iso) return null
+  const d = new Date(iso.includes('T') ? iso : `${iso}T12:00:00`)
+  if (Number.isNaN(d.getTime())) return null
+  return d.toLocaleDateString('es', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
+}
+
+const fechaRevisionFmt = formatFechaRevision(ficha.fechaRevision)
+
+const showBloqueConfianza =
+  !!ficha.nivelEvidencia ||
+  !!fechaRevisionFmt ||
+  !!ficha.revisadoPor ||
+  !!ficha.tipoIA ||
+  !!ficha.faseAdopcion ||
+  (ficha.fuentes?.length ?? 0) > 0
 
 const calendarUrl = getCalendarUrl()
 
@@ -65,12 +120,74 @@ const complejidadColor = {
       <span class="rounded-full border border-condor-navy/15 bg-condor-navy/8 px-3 py-1 text-xs text-foreground-muted" style="font-family: var(--font-condor-mono);">
         {ficha.areaFuncional}
       </span>
-      {ficha.complejidad && (
-        <span class={`rounded-full px-3 py-1 text-xs font-semibold ${complejidadColor}`}>
-          Complejidad {ficha.complejidad}
+      {ficha.tipoIA && (
+        <span class="rounded-full border border-condor-navy/15 bg-condor-navy/8 px-3 py-1 text-xs text-foreground-muted" style="font-family: var(--font-condor-mono);">
+          {tipoIALabels[ficha.tipoIA] ?? ficha.tipoIA}
+        </span>
+      )}
+      {ficha.faseAdopcion && (
+        <span class="rounded-full border border-condor-navy/15 bg-white/60 px-3 py-1 text-xs text-foreground-muted" style="font-family: var(--font-condor-mono);">
+          Adopción: {faseAdopcionLabels[ficha.faseAdopcion] ?? ficha.faseAdopcion}
         </span>
       )}
     </div>
+
+    {showBloqueConfianza && (
+      <div class="mb-10 rounded-2xl border border-condor-navy/15 bg-gradient-to-br from-background-card to-condor-sky/10 p-6 shadow-[var(--shadow-card)] md:p-8">
+        <div class="text-sm font-bold text-foreground mb-4">Confianza editorial</div>
+        <p class="mb-6 text-sm leading-6 text-foreground-muted">
+          Cómo clasificamos la evidencia, cuándo revisamos la ficha y qué referencias respaldan el contenido.
+        </p>
+
+        <div class="grid gap-6 border-t border-condor-navy/10 pt-6 md:grid-cols-2">
+          <dl class="space-y-3 text-sm">
+            {ficha.nivelEvidencia && (
+              <div>
+                <dt class="font-semibold text-foreground">Nivel de evidencia</dt>
+                <dd class="mt-1 text-foreground-muted">
+                  {nivelEvidenciaLabels[ficha.nivelEvidencia] ?? ficha.nivelEvidencia}
+                </dd>
+              </div>
+            )}
+            {(fechaRevisionFmt || ficha.revisadoPor) && (
+              <div>
+                <dt class="font-semibold text-foreground">Última revisión</dt>
+                <dd class="mt-1 text-foreground-muted">
+                  {[fechaRevisionFmt, ficha.revisadoPor].filter(Boolean).join(' · ')}
+                </dd>
+              </div>
+            )}
+            {!ficha.nivelEvidencia && !fechaRevisionFmt && !ficha.revisadoPor && (
+              <p class="text-foreground-muted">Los metadatos editoriales se completan progresivamente en el CMS.</p>
+            )}
+          </dl>
+
+          {ficha.fuentes?.length > 0 && (
+            <div>
+              <div class="text-xs font-bold uppercase tracking-wide text-foreground-muted mb-3" style="font-family: var(--font-condor-mono);">
+                Fuentes ({ficha.fuentes.length})
+              </div>
+              <ul class="space-y-3">
+                {ficha.fuentes.map((f) => (
+                  <li class="flex items-start gap-3 text-sm">
+                    <span class={`mt-0.5 shrink-0 rounded px-1.5 py-0.5 text-xs font-bold ${f.tier === 'A' ? 'bg-condor-navy text-foreground-on-navy' : 'bg-condor-navy/10 text-foreground'}`}>
+                      {f.tier}
+                    </span>
+                    {f.url ? (
+                      <a href={f.url} target="_blank" rel="noopener noreferrer" class="text-condor-bluegray hover:text-foreground underline underline-offset-2 transition-colors">
+                        {f.titulo}
+                      </a>
+                    ) : (
+                      <span class="text-foreground-muted">{f.titulo}</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+    )}
 
     <div class="grid gap-8 md:grid-cols-3">
       <!-- Contenido principal -->
@@ -147,29 +264,6 @@ const complejidadColor = {
                 </span>
               ))}
             </div>
-          </div>
-        )}
-
-        <!-- Fuentes -->
-        {ficha.fuentes?.length > 0 && (
-          <div class="rounded-2xl border border-condor-navy/10 bg-background-card p-6 shadow-[var(--shadow-card)]">
-            <div class="text-sm font-semibold text-foreground mb-3">Fuentes</div>
-            <ul class="space-y-3">
-              {ficha.fuentes.map((f) => (
-                <li class="flex items-start gap-3 text-sm">
-                  <span class={`mt-0.5 shrink-0 rounded px-1.5 py-0.5 text-xs font-bold ${f.tier === 'A' ? 'bg-condor-navy text-foreground-on-navy' : 'bg-condor-navy/10 text-foreground'}`}>
-                    {f.tier}
-                  </span>
-                  {f.url ? (
-                    <a href={f.url} target="_blank" rel="noopener noreferrer" class="text-condor-bluegray hover:text-foreground underline underline-offset-2 transition-colors">
-                      {f.titulo}
-                    </a>
-                  ) : (
-                    <span class="text-foreground-muted">{f.titulo}</span>
-                  )}
-                </li>
-              ))}
-            </ul>
           </div>
         )}
 
