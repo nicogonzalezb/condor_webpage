@@ -7,7 +7,8 @@ import { getCalendarUrl } from '@/lib/site'
 
 const { slug } = Astro.params
 
-const ficha = await sanity.fetch<{
+const ficha = sanity
+  ? await sanity.fetch<{
   title: string
   industria: string
   areaFuncional: string
@@ -44,6 +45,7 @@ const ficha = await sanity.fetch<{
     fuentes
   }
 `, { slug })
+  : null
 
 if (!ficha) return Astro.redirect('/404')
 

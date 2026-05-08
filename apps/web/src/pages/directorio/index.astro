@@ -4,7 +4,8 @@ import SectionHeading from '@/components/SectionHeading.astro'
 import Button from '@/components/Button.astro'
 import { sanity } from '@/lib/sanity'
 
-const fichas = await sanity.fetch<{
+const fichas = sanity
+  ? await sanity.fetch<{
   slug: string
   title: string
   industria: string
@@ -29,6 +30,7 @@ const fichas = await sanity.fetch<{
     nivelEvidencia
   }
 `)
+  : []
 
 const tipoIALabels: Record<string, string> = {
   predictivo: 'Predictivo',
