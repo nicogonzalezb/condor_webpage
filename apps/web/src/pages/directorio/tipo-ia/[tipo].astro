@@ -1,0 +1,5 @@
+---
+const tipo = Astro.params.tipo
+if (!tipo) return Astro.redirect('/404', 404)
+return Astro.redirect(`/directorio-casos-ia/tipo-ia/${tipo}`, 301)
+---

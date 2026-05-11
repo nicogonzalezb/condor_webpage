@@ -1,0 +1,5 @@
+---
+const area = Astro.params.area
+if (!area) return Astro.redirect('/404', 404)
+return Astro.redirect(`/directorio-casos-ia/area/${area}`, 301)
+---

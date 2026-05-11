@@ -1,0 +1,5 @@
+---
+const industria = Astro.params.industria
+if (!industria) return Astro.redirect('/404', 404)
+return Astro.redirect(`/directorio-casos-ia/industria/${industria}`, 301)
+---
