@@ -1,0 +1,86 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import SectionHeading from '@/components/SectionHeading.astro'
+import Button from '@/components/Button.astro'
+import { sanity } from '@/lib/sanity'
+
+const param = Astro.params.tipo ?? ''
+
+const rows = sanity
+  ? await sanity.fetch<
+      {
+        slug: string
+        title: string
+        industria: string
+        areaFuncional: string
+        descripcion: string
+        complejidad: string
+        tipoIA: string | null
+      }[]
+    >(`
+  *[_type == "useCaseFicha" && (!defined(estadoPublicacion) || estadoPublicacion == "publicado") && defined(tipoIA)] | order(title asc) {
+    "slug": slug.current,
+    title,
+    industria,
+    areaFuncional,
+    descripcion,
+    complejidad,
+    tipoIA
+  }
+`)
+  : []
+
+const tiposValidos = [...new Set(rows.map((r) => r.tipoIA).filter((t): t is string => !!t))]
+
+if (!tiposValidos.includes(param)) {
+  return Astro.redirect('/404')
+}
+
+const fichas = rows.filter((r) => r.tipoIA === param)
+
+const tipoIALabels: Record<string, string> = {
+  predictivo: 'Predictivo',
+  generativo: 'Generativo',
+  recomendacion: 'Recomendación',
+  clasificacion: 'Clasificación',
+  vision: 'Visión por computador',
+  nlp: 'NLP',
+  agentes: 'Agentes / orquestación',
+  optimizacion: 'Optimización',
+}
+
+const tipoLabel = tipoIALabels[param] ?? param
+const title = `Casos de uso IA · ${tipoLabel}`
+const description = `Fichas clasificadas como «${tipoLabel}» en el directorio Condór.`
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="container-condor py-14 md:py-20">
+    <nav class="mb-6 flex flex-wrap items-center gap-2 text-xs text-foreground-muted" style="font-family: var(--font-condor-mono);">
+      <a href="/directorio-casos-ia" class="hover:text-foreground transition-colors">Casos de uso IA</a>
+      <span>/</span>
+      <span class="text-foreground">Tipo de IA · {tipoLabel}</span>
+    </nav>
+
+    <SectionHeading title={tipoLabel} subtitle={`${fichas.length} ficha${fichas.length === 1 ? '' : 's'} con este tipo principal de IA.`} />
+
+    <ul class="mt-10 space-y-4">
+      {fichas.map((f) => (
+        <li class="rounded-2xl border border-condor-navy/10 bg-background-card p-6 shadow-[var(--shadow-card)]">
+          <div class="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+            <div>
+              <h2 class="text-lg font-bold text-foreground">{f.title}</h2>
+              <p class="mt-1 text-xs text-foreground-muted" style="font-family: var(--font-condor-mono);">
+                {f.industria} · {f.areaFuncional} · {f.complejidad}
+              </p>
+              <p class="mt-2 text-sm leading-6 text-foreground-muted line-clamp-2">{f.descripcion}</p>
+            </div>
+            <Button href={`/directorio-casos-ia/${f.slug}`} variant="secondary" class="shrink-0 self-start">
+              Ver ficha
+            </Button>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</BaseLayout>

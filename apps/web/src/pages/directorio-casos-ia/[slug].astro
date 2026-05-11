@@ -1,0 +1,474 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import SectionHeading from '@/components/SectionHeading.astro'
+import Button from '@/components/Button.astro'
+import { sanity } from '@/lib/sanity'
+import { getCalendarUrl } from '@/lib/site'
+import { slugifyTaxonomy } from '@/lib/directorioUrls'
+
+const { slug } = Astro.params
+
+const ficha = sanity
+  ? await sanity.fetch<{
+      title: string
+      industria: string
+      areaFuncional: string
+      descripcion: string
+      intro: string | null
+      secciones: { titulo: string; cuerpo: string }[] | null
+      targetQuery: string | null
+      searchIntent: string | null
+      seoTitle: string | null
+      metaDescription: string | null
+      canonicalUrl: string | null
+      inputs: string[]
+      outputs: string[]
+      riesgos: string[]
+      kpis: string[]
+      complejidad: string
+      regulacion: string[]
+      tipoIA: string | null
+      faseAdopcion: string | null
+      nivelEvidencia: string | null
+      fechaRevision: string | null
+      revisadoPor: string | null
+      fuentes: { titulo: string; url: string; tier: 'A' | 'B' }[]
+      faq: { pregunta: string; respuesta: string }[] | null
+      relacionados: { title: string; slug: string }[]
+    } | null>(
+      `
+  *[_type == "useCaseFicha" && slug.current == $slug && (!defined(estadoPublicacion) || estadoPublicacion == "publicado")][0] {
+    title,
+    industria,
+    areaFuncional,
+    descripcion,
+    intro,
+    "secciones": coalesce(secciones, [])[]{titulo, cuerpo},
+    targetQuery,
+    searchIntent,
+    seoTitle,
+    metaDescription,
+    canonicalUrl,
+    inputs,
+    outputs,
+    riesgos,
+    kpis,
+    complejidad,
+    regulacion,
+    tipoIA,
+    faseAdopcion,
+    nivelEvidencia,
+    fechaRevision,
+    revisadoPor,
+    fuentes,
+    "faq": coalesce(faq, [])[]{pregunta, respuesta},
+    "relacionados": *[_type == "useCaseFicha" && (!defined(estadoPublicacion) || estadoPublicacion == "publicado") && slug.current in coalesce(^.casosRelacionadosSlugs, []) && slug.current != $slug] | order(title asc) {
+      title,
+      "slug": slug.current
+    }
+  }
+`,
+      { slug },
+    )
+  : null
+
+if (!ficha) return Astro.redirect('/404')
+
+const faqItems = ficha.faq ?? []
+const seccionItems = (ficha.secciones ?? []).filter((s) => s.titulo?.trim() && s.cuerpo?.trim())
+
+const nivelEvidenciaLabels: Record<string, string> = {
+  observacional: 'Observacional — marcos y guías',
+  piloto_benchmark: 'Piloto o benchmark sectorial',
+  produccion_documentada: 'Producción documentada',
+}
+
+const tipoIALabels: Record<string, string> = {
+  predictivo: 'Predictivo',
+  generativo: 'Generativo',
+  recomendacion: 'Recomendación',
+  clasificacion: 'Clasificación',
+  vision: 'Visión por computador',
+  nlp: 'NLP',
+  agentes: 'Agentes / orquestación',
+  optimizacion: 'Optimización',
+}
+
+const faseAdopcionLabels: Record<string, string> = {
+  exploracion: 'Exploración',
+  piloto: 'Piloto',
+  escala: 'Escala',
+  optimizacion: 'Optimización',
+}
+
+function formatFechaRevision(iso: string | null | undefined): string | null {
+  if (!iso) return null
+  const d = new Date(iso.includes('T') ? iso : `${iso}T12:00:00`)
+  if (Number.isNaN(d.getTime())) return null
+  return d.toLocaleDateString('es', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
+}
+
+const fechaRevisionFmt = formatFechaRevision(ficha.fechaRevision)
+
+const showBloqueConfianza =
+  !!ficha.nivelEvidencia ||
+  !!fechaRevisionFmt ||
+  !!ficha.revisadoPor ||
+  !!ficha.tipoIA ||
+  !!ficha.faseAdopcion ||
+  (ficha.fuentes?.length ?? 0) > 0
+
+const calendarUrl = getCalendarUrl()
+
+const siteOrigin = Astro.site?.origin ?? new URL(Astro.url).origin
+const industriaHub = `${siteOrigin}/directorio-casos-ia/industria/${slugifyTaxonomy(ficha.industria)}`
+const areaHub = `${siteOrigin}/directorio-casos-ia/area/${slugifyTaxonomy(ficha.areaFuncional)}`
+const tipoHub = ficha.tipoIA ? `${siteOrigin}/directorio-casos-ia/tipo-ia/${ficha.tipoIA}` : null
+
+let position = 1
+const breadcrumbItems: {position: number; name: string; item: string}[] = [
+  {position: position++, name: 'Casos de uso IA', item: `${siteOrigin}/directorio-casos-ia`},
+  {position: position++, name: ficha.industria, item: industriaHub},
+  {position: position++, name: ficha.areaFuncional, item: areaHub},
+]
+if (ficha.tipoIA && tipoHub) {
+  breadcrumbItems.push({
+    position: position++,
+    name: tipoIALabels[ficha.tipoIA] ?? ficha.tipoIA,
+    item: tipoHub,
+  })
+}
+breadcrumbItems.push({
+  position: position++,
+  name: ficha.title,
+  item: `${siteOrigin}/directorio-casos-ia/${slug}`,
+})
+
+const jsonLd: Record<string, unknown>[] = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbItems.map((b) => ({
+      '@type': 'ListItem',
+      position: b.position,
+      name: b.name,
+      item: b.item,
+    })),
+  },
+]
+
+if (faqItems.length > 0) {
+  jsonLd.push({
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.pregunta,
+      acceptedAnswer: {'@type': 'Answer', text: item.respuesta},
+    })),
+  })
+}
+
+const layoutTitle = (ficha.seoTitle && ficha.seoTitle.trim()) ? ficha.seoTitle.trim() : ficha.title
+const layoutDescription = (ficha.metaDescription && ficha.metaDescription.trim())
+  ? ficha.metaDescription.trim()
+  : ficha.descripcion
+const layoutCanonical = (ficha.canonicalUrl && ficha.canonicalUrl.trim()) ? ficha.canonicalUrl.trim() : undefined
+
+const complejidadColor = {
+  baja: 'bg-condor-sky/20 text-condor-bluegray',
+  media: 'bg-condor-pink/30 text-foreground',
+  alta: 'bg-condor-navy/10 text-foreground',
+}[ficha.complejidad] ?? 'bg-condor-navy/10 text-foreground'
+---
+
+<BaseLayout title={layoutTitle} description={layoutDescription} canonicalUrl={layoutCanonical}>
+  <div class="container-condor py-14 md:py-20">
+    <!-- Breadcrumb visual + hubs -->
+    <nav class="mb-6 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-foreground-muted" style="font-family: var(--font-condor-mono);" aria-label="Migas de pan">
+      <a href="/directorio-casos-ia" class="hover:text-foreground transition-colors">Casos de uso IA</a>
+      <span class="text-foreground-muted/80">/</span>
+      <a href={`/directorio-casos-ia/industria/${slugifyTaxonomy(ficha.industria)}`} class="hover:text-foreground transition-colors">
+        {ficha.industria}
+      </a>
+      <span class="text-foreground-muted/80">/</span>
+      <a href={`/directorio-casos-ia/area/${slugifyTaxonomy(ficha.areaFuncional)}`} class="hover:text-foreground transition-colors">
+        {ficha.areaFuncional}
+      </a>
+      {ficha.tipoIA && (
+        <>
+          <span class="text-foreground-muted/80">/</span>
+          <a href={`/directorio-casos-ia/tipo-ia/${ficha.tipoIA}`} class="hover:text-foreground transition-colors">
+            {tipoIALabels[ficha.tipoIA] ?? ficha.tipoIA}
+          </a>
+        </>
+      )}
+      <span class="text-foreground-muted/80">/</span>
+      <span class="text-foreground max-w-[min(100%,14rem)] truncate" title={ficha.title}>{ficha.title}</span>
+    </nav>
+
+    <SectionHeading as="h1" title={ficha.title} subtitle={ficha.descripcion} />
+
+    {ficha.intro && ficha.intro.trim() && (
+      <p class="mt-6 max-w-3xl text-base leading-7 text-foreground-muted border-l-2 border-condor-sky/50 pl-5">
+        {ficha.intro.trim()}
+      </p>
+    )}
+
+    {seccionItems.length > 0 && (
+      <div class="mt-10 max-w-3xl space-y-10">
+        {seccionItems.map((sec, i) => (
+          <section class="scroll-mt-24" aria-labelledby={`ficha-seccion-${i}`}>
+            <h2 id={`ficha-seccion-${i}`} class="text-xl font-bold tracking-tight text-condor-navy">
+              {sec.titulo.trim()}
+            </h2>
+            <div class="mt-3 text-base leading-7 text-foreground-muted whitespace-pre-line">
+              {sec.cuerpo.trim()}
+            </div>
+          </section>
+        ))}
+      </div>
+    )}
+
+    {(ficha.targetQuery || ficha.searchIntent) && (
+      <p class="mt-4 text-xs text-foreground-muted" style="font-family: var(--font-condor-mono);">
+        {ficha.targetQuery && <span class="mr-3">Consulta: {ficha.targetQuery}</span>}
+        {ficha.searchIntent && <span>Intención: {ficha.searchIntent}</span>}
+      </p>
+    )}
+
+    <!-- Tags + complejidad -->
+    <div class="mb-10 flex flex-wrap gap-2">
+      <a
+        href={`/directorio-casos-ia/industria/${slugifyTaxonomy(ficha.industria)}`}
+        class="rounded-full bg-condor-sky/20 border border-condor-sky/40 px-3 py-1 text-xs text-condor-bluegray hover:border-condor-sky/70 transition-colors"
+        style="font-family: var(--font-condor-mono);"
+      >
+        {ficha.industria}
+      </a>
+      <a
+        href={`/directorio-casos-ia/area/${slugifyTaxonomy(ficha.areaFuncional)}`}
+        class="rounded-full border border-condor-navy/15 bg-condor-navy/8 px-3 py-1 text-xs text-foreground-muted hover:border-condor-navy/35 transition-colors"
+        style="font-family: var(--font-condor-mono);"
+      >
+        {ficha.areaFuncional}
+      </a>
+      {ficha.tipoIA && (
+        <a
+          href={`/directorio-casos-ia/tipo-ia/${ficha.tipoIA}`}
+          class="rounded-full border border-condor-navy/15 bg-condor-navy/8 px-3 py-1 text-xs text-foreground-muted hover:border-condor-navy/35 transition-colors"
+          style="font-family: var(--font-condor-mono);"
+        >
+          {tipoIALabels[ficha.tipoIA] ?? ficha.tipoIA}
+        </a>
+      )}
+      {ficha.faseAdopcion && (
+        <span class="rounded-full border border-condor-navy/15 bg-white/60 px-3 py-1 text-xs text-foreground-muted" style="font-family: var(--font-condor-mono);">
+          Adopción: {faseAdopcionLabels[ficha.faseAdopcion] ?? ficha.faseAdopcion}
+        </span>
+      )}
+    </div>
+
+    {showBloqueConfianza && (
+      <div class="mb-10 rounded-2xl border border-condor-navy/15 bg-gradient-to-br from-background-card to-condor-sky/10 p-6 shadow-[var(--shadow-card)] md:p-8">
+        <div class="text-sm font-bold text-foreground mb-4">Confianza editorial</div>
+        <p class="mb-6 text-sm leading-6 text-foreground-muted">
+          Cómo clasificamos la evidencia, cuándo revisamos la ficha y qué referencias respaldan el contenido.
+        </p>
+
+        <div class="grid gap-6 border-t border-condor-navy/10 pt-6 md:grid-cols-2">
+          <dl class="space-y-3 text-sm">
+            {ficha.nivelEvidencia && (
+              <div>
+                <dt class="font-semibold text-foreground">Nivel de evidencia</dt>
+                <dd class="mt-1 text-foreground-muted">
+                  {nivelEvidenciaLabels[ficha.nivelEvidencia] ?? ficha.nivelEvidencia}
+                </dd>
+              </div>
+            )}
+            {(fechaRevisionFmt || ficha.revisadoPor) && (
+              <div>
+                <dt class="font-semibold text-foreground">Última revisión</dt>
+                <dd class="mt-1 text-foreground-muted">
+                  {[fechaRevisionFmt, ficha.revisadoPor].filter(Boolean).join(' · ')}
+                </dd>
+              </div>
+            )}
+            {!ficha.nivelEvidencia && !fechaRevisionFmt && !ficha.revisadoPor && (
+              <p class="text-foreground-muted">Los metadatos editoriales se completan progresivamente en el CMS.</p>
+            )}
+          </dl>
+
+          {ficha.fuentes?.length > 0 && (
+            <div>
+              <div class="text-xs font-bold uppercase tracking-wide text-foreground-muted mb-3" style="font-family: var(--font-condor-mono);">
+                Fuentes ({ficha.fuentes.length})
+              </div>
+              <ul class="space-y-3">
+                {ficha.fuentes.map((f) => (
+                  <li class="flex items-start gap-3 text-sm">
+                    <span class={`mt-0.5 shrink-0 rounded px-1.5 py-0.5 text-xs font-bold ${f.tier === 'A' ? 'bg-condor-navy text-foreground-on-navy' : 'bg-condor-navy/10 text-foreground'}`}>
+                      {f.tier}
+                    </span>
+                    {f.url ? (
+                      <a href={f.url} target="_blank" rel="noopener noreferrer" class="text-condor-bluegray hover:text-foreground underline underline-offset-2 transition-colors">
+                        {f.titulo}
+                      </a>
+                    ) : (
+                      <span class="text-foreground-muted">{f.titulo}</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+    )}
+
+    <div class="grid gap-8 md:grid-cols-3">
+      <!-- Contenido principal -->
+      <div class="md:col-span-2 space-y-6">
+
+        <!-- Inputs / Outputs -->
+        <div class="grid gap-4 sm:grid-cols-2">
+          {ficha.inputs?.length > 0 && (
+            <div class="rounded-2xl border border-condor-navy/10 bg-background-card p-6 shadow-[var(--shadow-card)]">
+              <div class="text-sm font-semibold text-foreground mb-3">Datos requeridos</div>
+              <ul class="space-y-2">
+                {ficha.inputs.map((item) => (
+                  <li class="flex gap-2 text-sm text-foreground-muted">
+                    <span class="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-condor-sky" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {ficha.outputs?.length > 0 && (
+            <div class="rounded-2xl border border-condor-navy/10 bg-background-card p-6 shadow-[var(--shadow-card)]">
+              <div class="text-sm font-semibold text-foreground mb-3">Resultados esperados</div>
+              <ul class="space-y-2">
+                {ficha.outputs.map((item) => (
+                  <li class="flex gap-2 text-sm text-foreground-muted">
+                    <span class="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-condor-pink" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+
+        <!-- KPIs -->
+        {ficha.kpis?.length > 0 && (
+          <div class="rounded-2xl border border-condor-navy/10 bg-background-card p-6 shadow-[var(--shadow-card)]">
+            <div class="text-sm font-semibold text-foreground mb-3">KPIs</div>
+            <div class="flex flex-wrap gap-2">
+              {ficha.kpis.map((kpi) => (
+                <span class="rounded-full border border-condor-navy/15 bg-condor-navy/6 px-3 py-1 text-xs text-foreground-muted">
+                  {kpi}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Riesgos -->
+        {ficha.riesgos?.length > 0 && (
+          <div class="rounded-2xl border border-condor-pink/30 bg-background-card p-6 shadow-[var(--shadow-card)]">
+            <div class="text-sm font-semibold text-foreground mb-3">Riesgos</div>
+            <ul class="space-y-2">
+              {ficha.riesgos.map((r) => (
+                <li class="flex gap-2 text-sm text-foreground-muted">
+                  <span class="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-condor-pink" />
+                  {r}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <!-- Regulación -->
+        {ficha.regulacion?.length > 0 && (
+          <div class="rounded-2xl border border-condor-navy/10 bg-background-card p-6 shadow-[var(--shadow-card)]">
+            <div class="text-sm font-semibold text-foreground mb-3">Regulación aplicable</div>
+            <div class="flex flex-wrap gap-2">
+              {ficha.regulacion.map((reg) => (
+                <span class="rounded-full bg-condor-sky/20 border border-condor-sky/40 px-3 py-1 text-xs text-condor-bluegray" style="font-family: var(--font-condor-mono);">
+                  {reg}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {faqItems.length > 0 && (
+          <div class="rounded-2xl border border-condor-navy/10 bg-background-card p-6 shadow-[var(--shadow-card)]">
+            <div class="text-sm font-semibold text-foreground mb-4">Preguntas frecuentes</div>
+            <dl class="space-y-5">
+              {faqItems.map((item) => (
+                <div>
+                  <dt class="text-sm font-semibold text-foreground">{item.pregunta}</dt>
+                  <dd class="mt-1.5 text-sm leading-6 text-foreground-muted whitespace-pre-line">{item.respuesta}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        )}
+
+        {ficha.relacionados?.length > 0 && (
+          <div class="rounded-2xl border border-condor-navy/10 bg-background-card p-6 shadow-[var(--shadow-card)]">
+            <div class="text-sm font-semibold text-foreground mb-3">Casos relacionados</div>
+            <ul class="space-y-2">
+              {ficha.relacionados.map((rel) => (
+                <li>
+                  <a
+                    href={`/directorio-casos-ia/${rel.slug}`}
+                    class="text-sm text-condor-bluegray hover:text-foreground underline underline-offset-2 transition-colors"
+                  >
+                    {rel.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+      </div>
+
+      <!-- Sidebar CTA -->
+      <aside class="space-y-4 self-start">
+        <div class="rounded-3xl bg-background-navy p-7">
+          <div class="text-lg font-extrabold text-foreground-on-navy leading-snug">
+            ¿Quieres implementar esto?
+          </div>
+          <p class="mt-2 text-sm text-foreground-on-navy/75" style="font-family: var(--font-condor-serif);">
+            Te ayudamos a aterrizarlo a tu industria, tus datos y tus restricciones.
+          </p>
+          <div class="mt-6 flex flex-col gap-3">
+            <Button href={calendarUrl} variant="accent">
+              Agenda una reunión
+            </Button>
+            <Button href="/contacto" variant="outline" class="border-white/30 text-foreground-on-navy hover:bg-white/10 hover:text-foreground-on-navy">
+              Escríbenos
+            </Button>
+          </div>
+        </div>
+
+        <div class="rounded-2xl border border-condor-navy/10 bg-background-card p-5 shadow-[var(--shadow-card)]">
+          <a href="/directorio-casos-ia" class="text-sm text-condor-bluegray hover:text-foreground transition-colors flex items-center gap-1.5">
+            ← Volver al listado
+          </a>
+        </div>
+      </aside>
+    </div>
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </div>
+</BaseLayout>
