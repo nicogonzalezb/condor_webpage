@@ -222,8 +222,8 @@ const complejidadColor = {
     {seccionItems.length > 0 && (
       <div class="mt-10 max-w-3xl space-y-10">
         {seccionItems.map((sec, i) => (
-          <section class="scroll-mt-24" aria-labelledby={`ficha-seccion-${i}`}>
-            <h2 id={`ficha-seccion-${i}`} class="text-xl font-bold tracking-tight text-condor-navy">
+          <section class="scroll-mt-24" aria-labelledby={`caso-seccion-${i}`}>
+            <h2 id={`caso-seccion-${i}`} class="text-xl font-bold tracking-tight text-condor-navy">
               {sec.titulo.trim()}
             </h2>
             <div class="mt-3 text-base leading-7 text-foreground-muted whitespace-pre-line">
@@ -277,7 +277,7 @@ const complejidadColor = {
       <div class="mb-10 rounded-2xl border border-condor-navy/15 bg-gradient-to-br from-background-card to-condor-sky/10 p-6 shadow-[var(--shadow-card)] md:p-8">
         <div class="text-sm font-bold text-foreground mb-4">Confianza editorial</div>
         <p class="mb-6 text-sm leading-6 text-foreground-muted">
-          Cómo clasificamos la evidencia, cuándo revisamos la ficha y qué referencias respaldan el contenido.
+          Cómo clasificamos la evidencia, cuándo revisamos el caso y qué referencias respaldan el contenido.
         </p>
 
         <div class="grid gap-6 border-t border-condor-navy/10 pt-6 md:grid-cols-2">

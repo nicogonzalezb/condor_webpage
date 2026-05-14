@@ -88,7 +88,7 @@ const chipBase =
 
 <BaseLayout
   title="Directorio de casos de uso IA"
-  description="Fichas verificables de casos de uso AI-first por industria: datos requeridos, riesgos, KPIs y evidencia citada."
+  description="Casos verificables de uso de IA AI-first por industria: datos requeridos, riesgos, KPIs y evidencia citada."
 >
   <div class="container-condor py-14 md:py-20">
     <nav class="mb-6 text-xs text-foreground-muted" style="font-family: var(--font-condor-mono);">
@@ -97,7 +97,7 @@ const chipBase =
 
     <SectionHeading
       title="Directorio de casos de uso IA"
-      subtitle="Fichas verificadas por industria, área, complejidad, tipo de IA y fase de adopción."
+      subtitle="Casos verificados por industria, área, complejidad, tipo de IA y fase de adopción."
     />
 
     {fichas.length > 0 && (
@@ -106,7 +106,7 @@ const chipBase =
           Hubs del directorio
         </p>
         <p class="text-sm text-foreground-muted mb-4">
-          Páginas por industria, área y tipo de IA para enlazado interno y jerarquía clara (sin sustituir la URL canónica de cada ficha).
+          Páginas por industria, área y tipo de IA para enlazado interno y jerarquía clara (sin sustituir la URL canónica de cada caso).
         </p>
         <div class="space-y-3 text-sm">
           <div>
@@ -157,7 +157,7 @@ const chipBase =
 
     {fichas.length === 0 ? (
       <div class="rounded-2xl border border-condor-navy/10 bg-background-card p-10 text-center shadow-[var(--shadow-card)]">
-        <p class="text-sm text-foreground-muted">Las fichas están en construcción. Vuelve pronto.</p>
+        <p class="text-sm text-foreground-muted">Los casos están en construcción. Vuelve pronto.</p>
       </div>
     ) : (
       <>
@@ -339,10 +339,10 @@ const chipBase =
           class="mb-8 hidden rounded-2xl border border-condor-navy/10 bg-background-card px-6 py-8 text-center text-sm text-foreground-muted shadow-[var(--shadow-card)]"
           role="status"
         >
-          Ninguna ficha coincide con los filtros seleccionados.
+          Ningún caso coincide con los filtros seleccionados.
         </p>
 
-        <!-- Grid de fichas -->
+        <!-- Grid de casos -->
         <div id="directorio-grid" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {fichas.map((f) => (
             <div
@@ -436,7 +436,7 @@ const chipBase =
 
               <div class="mt-6">
                 <Button href={`/directorio-casos-ia/${f.slug}`} variant="secondary">
-                  Ver ficha completa
+                  Ver caso completo
                 </Button>
               </div>
             </div>

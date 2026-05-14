@@ -51,7 +51,7 @@ const tipoIALabels: Record<string, string> = {
 
 const tipoLabel = tipoIALabels[param] ?? param
 const title = `Casos de uso IA · ${tipoLabel}`
-const description = `Fichas clasificadas como «${tipoLabel}» en el directorio Condór.`
+const description = `Casos clasificados como «${tipoLabel}» en el directorio Condór.`
 ---
 
 <BaseLayout title={title} description={description}>
@@ -62,7 +62,7 @@ const description = `Fichas clasificadas como «${tipoLabel}» en el directorio 
       <span class="text-foreground">Tipo de IA · {tipoLabel}</span>
     </nav>
 
-    <SectionHeading title={tipoLabel} subtitle={`${fichas.length} ficha${fichas.length === 1 ? '' : 's'} con este tipo principal de IA.`} />
+    <SectionHeading title={tipoLabel} subtitle={`${fichas.length} caso${fichas.length === 1 ? '' : 's'} con este tipo principal de IA.`} />
 
     <ul class="mt-10 space-y-4">
       {fichas.map((f) => (
@@ -76,7 +76,7 @@ const description = `Fichas clasificadas como «${tipoLabel}» en el directorio 
               <p class="mt-2 text-sm leading-6 text-foreground-muted line-clamp-2">{f.descripcion}</p>
             </div>
             <Button href={`/directorio-casos-ia/${f.slug}`} variant="secondary" class="shrink-0 self-start">
-              Ver ficha
+              Ver caso
             </Button>
           </div>
         </li>

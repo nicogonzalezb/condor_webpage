@@ -2,7 +2,7 @@ import {defineField, defineType} from 'sanity'
 
 export const useCaseFicha = defineType({
   name: 'useCaseFicha',
-  title: 'Ficha de Caso de Uso IA',
+  title: 'Caso de uso IA (directorio)',
   type: 'document',
   fields: [
     defineField({
@@ -54,7 +54,7 @@ export const useCaseFicha = defineType({
     defineField({
       name: 'estadoPublicacion',
       title: 'Estado de publicación',
-      description: 'Solo las fichas en estado «Publicado» se listan en el sitio web.',
+      description: 'Solo los casos en estado «Publicado» se listan en el sitio web.',
       type: 'string',
       options: {
         list: [
@@ -68,9 +68,116 @@ export const useCaseFicha = defineType({
     defineField({
       name: 'descripcion',
       title: 'Descripción',
+      description:
+        'Resumen corto para tarjetas y fallback de meta; apunta a ~180–300 caracteres con intención clara.',
       type: 'text',
       rows: 3,
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'intro',
+      title: 'Intro visible (contenido)',
+      description:
+        'Párrafo de apertura en la página del caso (mejor 300–600 caracteres). Complementa la descripción con contexto útil para el lector.',
+      type: 'text',
+      rows: 5,
+    }),
+    defineField({
+      name: 'secciones',
+      title: 'Secciones del artículo',
+      description:
+        'Cuerpo principal por bloques (título + texto). En web se renderizan como H2 + párrafos para SEO.',
+      type: 'array',
+      validation: (Rule) => Rule.max(12),
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'titulo',
+              title: 'Título de la sección',
+              type: 'string',
+              validation: (Rule) => Rule.required().min(2),
+            }),
+            defineField({
+              name: 'cuerpo',
+              title: 'Cuerpo',
+              type: 'text',
+              rows: 8,
+              validation: (Rule) => Rule.required().min(20),
+            }),
+          ],
+          preview: {
+            select: {title: 'titulo'},
+          },
+        },
+      ],
+    }),
+    defineField({
+      name: 'targetQuery',
+      title: 'Consulta objetivo (SEO)',
+      description: 'Keyword o frase principal que el caso pretende cubrir (para trazabilidad editorial y research).',
+      type: 'string',
+    }),
+    defineField({
+      name: 'searchIntent',
+      title: 'Intención de búsqueda',
+      type: 'string',
+      options: {
+        list: [
+          {title: 'Informacional', value: 'informacional'},
+          {title: 'Comercial / comparación', value: 'comercial'},
+          {title: 'Transaccional', value: 'transaccional'},
+          {title: 'Navegacional', value: 'navegacional'},
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'informacional',
+    }),
+    defineField({
+      name: 'seoTitle',
+      title: 'Título SEO (<title>)',
+      description: 'Opcional. Si vacío, se usa el título principal. Ideal ~45–65 caracteres.',
+      type: 'string',
+    }),
+    defineField({
+      name: 'metaDescription',
+      title: 'Meta description',
+      description: 'Opcional. Snippet sugerido; suele funcionar bien ~130–170 caracteres útiles.',
+      type: 'text',
+      rows: 2,
+    }),
+    defineField({
+      name: 'canonicalUrl',
+      title: 'URL canónica absoluta',
+      description:
+        'Opcional. Si vacío, el sitio usa la URL canónica por defecto del caso (/directorio-casos-ia/[slug]).',
+      type: 'url',
+    }),
+    defineField({
+      name: 'faq',
+      title: 'Preguntas frecuentes',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({name: 'pregunta', title: 'Pregunta', type: 'string'}),
+            defineField({name: 'respuesta', title: 'Respuesta', type: 'text', rows: 3}),
+          ],
+          preview: {
+            select: {title: 'pregunta'},
+          },
+        },
+      ],
+    }),
+    defineField({
+      name: 'casosRelacionadosSlugs',
+      title: 'Casos relacionados (slugs)',
+      description:
+        'Slugs de otros casos en el mismo directorio (sin /directorio-casos-ia/). Generan enlaces internos en la página.',
+      type: 'array',
+      of: [{type: 'string'}],
     }),
     defineField({
       name: 'inputs',
@@ -144,7 +251,7 @@ export const useCaseFicha = defineType({
     defineField({
       name: 'nivelEvidencia',
       title: 'Nivel de evidencia',
-      description: 'Qué tan sólida es la base empírica o documental que respalda la ficha.',
+      description: 'Qué tan sólida es la base empírica o documental que respalda el caso.',
       type: 'string',
       options: {
         list: [

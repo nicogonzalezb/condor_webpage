@@ -2,15 +2,21 @@
 interface Props {
   title: string
   subtitle?: string
+  /** Nivel semántico del título principal del bloque (default h2 para no romper páginas existentes). */
+  as?: 'h1' | 'h2'
 }
 
-const { title, subtitle } = Astro.props
+const { title, subtitle, as = 'h2' } = Astro.props
+const headingClass =
+  'text-4xl md:text-5xl font-black tracking-tight text-condor-navy uppercase leading-none'
 ---
 
 <div class="mb-10">
-  <h2 class="text-4xl md:text-5xl font-black tracking-tight text-condor-navy uppercase leading-none">
-    {title}
-  </h2>
+  {as === 'h1' ? (
+    <h1 class={headingClass}>{title}</h1>
+  ) : (
+    <h2 class={headingClass}>{title}</h2>
+  )}
   {subtitle && (
     <p class="mt-4 max-w-2xl text-sm leading-6 text-foreground-muted border-l-4 border-condor-pink pl-4" style="font-family: var(--font-condor-mono);">
       {subtitle}

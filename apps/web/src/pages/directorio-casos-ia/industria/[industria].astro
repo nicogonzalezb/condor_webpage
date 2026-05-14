@@ -41,7 +41,7 @@ if (!industriaLabel) {
 const fichas = rows.filter((r) => r.industria === industriaLabel)
 
 const title = `Casos de uso IA · ${industriaLabel}`
-const description = `Fichas del directorio Condór en ${industriaLabel}: datos, riesgos, KPIs y fuentes para decisiones AI-first.`
+const description = `Casos del directorio Condór en ${industriaLabel}: datos, riesgos, KPIs y fuentes para decisiones AI-first.`
 ---
 
 <BaseLayout title={title} description={description}>
@@ -54,7 +54,7 @@ const description = `Fichas del directorio Condór en ${industriaLabel}: datos, 
 
     <SectionHeading
       title={industriaLabel}
-      subtitle={`${fichas.length} ficha${fichas.length === 1 ? '' : 's'} publicada${fichas.length === 1 ? '' : 's'}. Hubs editoriales para enlazar desde fichas y desde la home del directorio.`}
+      subtitle={`${fichas.length} caso${fichas.length === 1 ? '' : 's'} publicado${fichas.length === 1 ? '' : 's'}. Hubs editoriales para enlazar desde otros casos y desde el listado del directorio.`}
     />
 
     <ul class="mt-10 space-y-4">
@@ -70,7 +70,7 @@ const description = `Fichas del directorio Condór en ${industriaLabel}: datos, 
               <p class="mt-2 text-sm leading-6 text-foreground-muted line-clamp-2">{f.descripcion}</p>
             </div>
             <Button href={`/directorio-casos-ia/${f.slug}`} variant="secondary" class="shrink-0 self-start">
-              Ver ficha
+              Ver caso
             </Button>
           </div>
         </li>

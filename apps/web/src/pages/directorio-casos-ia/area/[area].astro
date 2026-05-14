@@ -41,7 +41,7 @@ if (!areaLabel) {
 const fichas = rows.filter((r) => r.areaFuncional === areaLabel)
 
 const title = `Casos de uso IA · ${areaLabel}`
-const description = `Directorio por área funcional: ${areaLabel}. Fichas accionables con riesgos, KPIs y evidencia.`
+const description = `Directorio por área funcional: ${areaLabel}. Casos accionables con riesgos, KPIs y evidencia.`
 ---
 
 <BaseLayout title={title} description={description}>
@@ -54,7 +54,7 @@ const description = `Directorio por área funcional: ${areaLabel}. Fichas accion
 
     <SectionHeading
       title={areaLabel}
-      subtitle={`${fichas.length} ficha${fichas.length === 1 ? '' : 's'} en esta área, todas las industrias incluidas.`}
+      subtitle={`${fichas.length} caso${fichas.length === 1 ? '' : 's'} en esta área, todas las industrias incluidas.`}
     />
 
     <ul class="mt-10 space-y-4">
@@ -70,7 +70,7 @@ const description = `Directorio por área funcional: ${areaLabel}. Fichas accion
               <p class="mt-2 text-sm leading-6 text-foreground-muted line-clamp-2">{f.descripcion}</p>
             </div>
             <Button href={`/directorio-casos-ia/${f.slug}`} variant="secondary" class="shrink-0 self-start">
-              Ver ficha
+              Ver caso
             </Button>
           </div>
         </li>

@@ -14,15 +14,21 @@ export function slugifyTaxonomy(value: string): string {
 /** Portada de varios directorios (hub). */
 export const DIRECTORIOS_HUB_PATH = '/directorio'
 
-/** Directorio de fichas de casos de uso IA (listado + detalle + hubs taxonómicos). */
+/** Directorio de casos de uso IA (listado + detalle + hubs taxonómicos). */
 export const CASOS_IA_DIRECTORY_BASE = '/directorio-casos-ia'
 
 export function casosIaIndexPath(): string {
   return CASOS_IA_DIRECTORY_BASE
 }
 
-export function casosIaFichaPath(slug: string): string {
+/** URL del detalle de un caso (slug del documento `useCaseFicha`). */
+export function casosIaCasoPath(slug: string): string {
   return `${CASOS_IA_DIRECTORY_BASE}/${slug}`
+}
+
+/** @deprecated Usa `casosIaCasoPath`. */
+export function casosIaFichaPath(slug: string): string {
+  return casosIaCasoPath(slug)
 }
 
 export function casosIaIndustriaPath(industriaLabel: string): string {
