@@ -184,6 +184,15 @@ const complejidadColor = {
   media: 'bg-condor-pink/30 text-foreground',
   alta: 'bg-condor-navy/10 text-foreground',
 }[ficha.complejidad] ?? 'bg-condor-navy/10 text-foreground'
+
+function mdToHtml(text: string): string {
+  return text
+    .trim()
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/\n/g, '<br>')
+}
 ---
 
 <BaseLayout title={layoutTitle} description={layoutDescription} canonicalUrl={layoutCanonical}>
@@ -214,9 +223,7 @@ const complejidadColor = {
     <SectionHeading as="h1" title={ficha.title} subtitle={ficha.descripcion} />
 
     {ficha.intro && ficha.intro.trim() && (
-      <p class="mt-6 max-w-3xl text-base leading-7 text-foreground-muted border-l-2 border-condor-sky/50 pl-5">
-        {ficha.intro.trim()}
-      </p>
+      <p class="mt-6 max-w-3xl text-base leading-7 text-foreground-muted border-l-2 border-condor-sky/50 pl-5" set:html={mdToHtml(ficha.intro)} />
     )}
 
     {seccionItems.length > 0 && (
@@ -226,9 +233,7 @@ const complejidadColor = {
             <h2 id={`caso-seccion-${i}`} class="text-xl font-bold tracking-tight text-condor-navy">
               {sec.titulo.trim()}
             </h2>
-            <div class="mt-3 text-base leading-7 text-foreground-muted whitespace-pre-line">
-              {sec.cuerpo.trim()}
-            </div>
+            <div class="mt-3 text-base leading-7 text-foreground-muted" set:html={mdToHtml(sec.cuerpo)} />
           </section>
         ))}
       </div>
@@ -415,7 +420,7 @@ const complejidadColor = {
               {faqItems.map((item) => (
                 <div>
                   <dt class="text-sm font-semibold text-foreground">{item.pregunta}</dt>
-                  <dd class="mt-1.5 text-sm leading-6 text-foreground-muted whitespace-pre-line">{item.respuesta}</dd>
+                  <dd class="mt-1.5 text-sm leading-6 text-foreground-muted" set:html={mdToHtml(item.respuesta)} />
                 </div>
               ))}
             </dl>
